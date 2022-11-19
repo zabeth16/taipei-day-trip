@@ -43,17 +43,6 @@ def attractions():
 	
 
 		keyword = request.args.get("keyword","")
-		
-		# find =  "SELECT * FROM travel WHERE name LIKE %s OR category = %s ORDER BY id  " # LIMIT 12
-	
-		# find_value = ("%" + keyword + "%" , keyword)
-		# mycursor.execute(find , find_value )
-		# search = mycursor.fetchall()
-		# print(search)
-		# print(len(search))
-
-
-
 
 
 		# # 圖片轉陣列區，記得放進去
@@ -114,9 +103,7 @@ def attractions():
 								
 								} )
 
-
-
-		# "data":	data[start_num : start_num + 12 ]
+		
 		
 		elif   page < (len(data)/12 -1) and keyword == ""	:
 			return   jsonify( { 
@@ -124,8 +111,7 @@ def attractions():
 				"data":	data[ page * 12 : page * 12 + 12 ]					
 				
 				} )
-
-								
+							
 
 
 		elif   page  > (len(data)/12) :
@@ -145,16 +131,13 @@ def attractions():
 
 
 
+	except:
 
-
-
-	# except:
-
-	# 	print("夏夜晚風裡的伺服器伍佰老師愛你一萬年")
-	# 	return jsonify(	{
-	# 						"error": True,
-	# 						"message": "夏夜晚風裡的伺服器伍佰老師愛你一萬年"
-	# 						}) , 500
+		print("夏夜晚風裡的伺服器伍佰老師愛你一萬年")
+		return jsonify(	{
+							"error": True,
+							"message": "夏夜晚風裡的伺服器伍佰老師愛你一萬年"
+							}) , 500
 
 	finally:
 		con.close()
