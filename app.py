@@ -1,8 +1,9 @@
 from flask import (Flask, jsonify, redirect, render_template, request, session,
-                   url_for)
+                   url_for )
 
 
 import json
+import math
 
 
 
@@ -37,95 +38,80 @@ def attractions():
 		con = pool.get_connection()
 		mycursor = con.cursor(dictionary = True)
 
-		
-		mycursor.execute(" SELECT * FROM travel ")
-		data = mycursor.fetchall()
+
 	
 
 		keyword = request.args.get("keyword","")
-
-
-		# # 圖片轉陣列區，記得放進去
-
-		data_list = []
-		data_list.append(data)
-
-		for i in range(len(data)):
-
-			data[i]["images"] = data[i]["images"].split(" ")
-			
-
-			
-		
-
 		page = int(request.args.get("page",""))
-
 		# print(type(page))
-		
-		if  page < (len(data)/12 -1) and keyword != "":
 
-			
-			find =  "SELECT * FROM travel WHERE name LIKE %s OR category = %s ORDER BY id LIMIT 12 OFFSET %s " # LIMIT 12
+
+
+		# 先判斷沒keyword 的
+		if keyword == "":
+			find =  "SELECT * FROM travel  LIMIT %s , %s " # LIMIT 12
 		
-			find_value = ("%" + keyword + "%" , keyword , page*12)
-			mycursor.execute(find , find_value )
+			find_value = ( page*12 , 12 ) # 判讀 起始 + 12 頁資料
+
+			mycursor.execute(find , find_value)
 			search = mycursor.fetchall()
-			print(search)
 			print(len(search))
 
-			for s in range(len(search)):
-				search[s]["images"] = search[s]["images"].split(" ")
+			for i in  range( len(search) )  :
+				search[i]["images"] = search[i]["images"].split(" ")
 
+			data_len = 12
 
-	
+			# page 4 , next page = null
+			if len(search) < data_len :
+
+				return jsonify( { 
+									"nextPage": None ,
+									"data":	search					
+									
+									} )
+			
+
+			else:
+
+				return jsonify( { 
+									"nextPage": page + 1 ,
+									"data":	search					
+									
+									} )
+
+		# keyword exsist
+		else  :
+
+			find_key =  "SELECT * FROM travel WHERE name LIKE %s OR category = %s ORDER BY id LIMIT 12 OFFSET %s " # LIMIT 12
 		
-			start_num = (12*page)
-			# print(start_num)
+			find_key_value = ("%" + keyword + "%" , keyword , page*12)
+			mycursor.execute(find_key , find_key_value )
+			search_key = mycursor.fetchall()
+			# print(search_key)
+			print(len(search_key))
 
-			# 藝文館所 page 0
-			if len(search) == (page + 12) :
-
-
-				return   jsonify( { 
-								"nextPage": page + 1 ,
-								"data":	search					
-								
-								} )
-
-			# 普通page 0~3
+			for i in  range( len(search_key) )  :
+				search_key[i]["images"] = search_key[i]["images"].split(" ")
 
 
+			data_len = 12
 
-			else: 
-				return   jsonify( { 
-								"nextPage": None ,
-								"data":	search					
-								
-								} )
-
-		
-		
-		elif   page < (len(data)/12 -1) and keyword == ""	:
-			return   jsonify( { 
-				"nextPage": page +1  ,
-				"data":	data[ page * 12 : page * 12 + 12 ]					
-				
-				} )
-							
+			# next page = null
+			if len(search_key) < data_len :
+				return jsonify( { 
+					"nextPage": None ,
+					"data":	search_key					
+					
+					} )
 
 
-		elif   page  > (len(data)/12) :
-			print("頁數超過了啊!")
-			return jsonify(	{
-							"error": True,
-							"message": "頁數超過了啊 !"
-							})			
-		
 
-		else : 
-			return   jsonify( { 
-						"nextPage": None ,
-						"data":	data[-10:]					
+			else:
+
+				return jsonify( { 
+						"nextPage": page + 1 ,
+						"data":	search_key				
 						
 						} )
 
@@ -227,9 +213,6 @@ def attractionId(attractionId):
 @app.route("/attraction/<id>")
 def attraction(id):
 	return	render_template("attraction.html")
-
-
-		
 
 
 
