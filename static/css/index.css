@@ -368,6 +368,17 @@ body{
 
 /* computer tablet RWD */
 @media (max-width:1200px){
+  
+    .nav_bar{
+        width: 90%;
+    }
+  
+    .search_bar{
+        width: 460px;
+    }
+    /* .input{
+        width: 80%;
+    } */
 
 
     .slogan{
@@ -407,8 +418,11 @@ body{
     }
 
 
+    .search_bar{
+        width: 290px;
+    }
     .search_card{
-        width: 41.5%;;
+        width: 290px;;
     }
 
     .welcome{
