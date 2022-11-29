@@ -1,0 +1,459 @@
+body{
+    margin: 0;
+    padding: 0;
+    background-color: #ffffff;
+    font-family: 'Noto Sans TC', cursive;
+}
+
+
+
+.nav{
+    /*固定頂端*/
+    background-color: #ffffff;
+    display: flex;
+    
+    align-items: center;
+    top:0;
+    justify-content: center;
+    position: fixed;
+    width: 100%;
+    z-index: 1; /*第一層*/
+    
+} 
+
+
+.nav_bar{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 1200px;
+    justify-content: space-between ;
+
+}
+
+.nav_title{
+    
+    justify-content: flex-start;
+    text-align: center;
+    font-family: 'Noto Sans TC';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 34px;
+    line-height: 34px;
+    color: #448899;
+    margin-top: 10px;
+    margin-bottom:10px;
+    
+
+
+}
+
+
+.top_buttum{
+    
+    display: flex ;
+    justify-content: flex-end;
+    flex-direction: row;
+
+}
+
+.forNavigation{
+    font-family: 'Noto Sans TC';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 16px;
+    width: 84px;
+    color: #666666 ;
+    border:none;
+    background-color: #FFFFFF;
+    cursor:pointer;
+    /* height: 34px; */
+}
+
+.welcome{
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-top: 54px;
+    height: 320px;
+    background-image:  url("welcomeTP101.jpg");
+    background-repeat: no-repeat;
+    background-position:top center;
+    background-size: cover;
+
+    
+}
+
+/* #TP101{ */
+
+    /* height: 320px; */
+    /* width: 100%;
+    margin-top: 54px; */
+
+    /* justify-content: center;
+    align-items: center; */
+    /* overflow:hidden;  */
+
+
+
+.slogan{
+    position:absolute;    
+    width: 1200px;
+    height: auto;
+    display: block;
+    color:#F8F8F8;
+}
+
+.slogan_1{
+    font-family: 'Noto Sans TC';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 28px;
+    /*我行距設 15px，所以再一個段行就可以有相距 15px 的間格*/
+    line-height: 15px;
+}
+
+.slogan_2{
+    
+    font-family: 'Noto Sans TC';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    /* line-height: 15px; */
+}
+
+.search_bar{
+    margin-top: 25px;
+    display: flex;
+    flex-wrap: wrap;
+    height: 46px;
+    width: 700px;
+}
+
+.locate_card{
+    display: flex;
+    flex-wrap: wrap;
+    display: none;
+    
+}
+
+
+.search_card{
+    background-color: #FFFFFF;
+    border-radius: 5px;
+    box-shadow: 0px 0px 20px #AABBCC;
+    width: 400px;
+    height:auto;
+    margin-top: 5px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    border-radius: 5px;
+    /* display: none; */
+
+}
+
+.search_text{
+    color:#000000;
+    font-family: 'Noto Sans TC';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 16px;
+    padding: 15px;
+    cursor:pointer;
+    background-color: #FFFFFF;
+    border: none;
+    border-radius: 5px;
+}
+
+.search_text:hover{
+    background-color: #E8E8E8;
+    cursor: pointer;
+}
+
+
+
+.input{
+
+    background-color: #ffffff;
+    width: 400px;
+    font-family: 'Noto Sans TC';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 16px;
+    padding: 15px;
+    border:0;
+    
+    
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+
+}
+
+.button_search{
+    background-color: #448899;
+    width: 60px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    cursor:pointer;
+    border:0;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+
+
+}
+
+
+
+
+.main{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.content{
+    margin-top: 54px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-gap: 30px;
+
+    width: 1200px;
+    height:816px;
+    background-color: #ffffff;
+}
+
+/**/
+.content-1{
+    margin-top: 54px;
+    display:flex;
+    width: 1200px;
+    height: auto;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between ;
+    /* margin: 30px; */
+}
+
+.square{
+    display: inline-grid;
+    height: 242px;
+    width: 270px;
+    border-style:solid;
+    border-color: #c4c4c4;
+    border-width: 1.5px;
+    border-radius: 5px ;
+    margin-bottom: 30px ;
+    
+}
+
+.title{
+    
+    grid-column-start: 1;
+    grid-column-end:2;    
+    font-size: 16px;
+    font-family: 'Noto Sans TC';
+    font-style: normal;
+    font-weight: 700;
+    background: rgb(0, 0, 0 , 0.6);
+    color: #FFFFFF;
+    /* opacity: 0.6; */
+    line-height: 40px;
+    padding-left: 10px;
+    overflow: hidden;
+        
+    position: relative; 
+    height:40px;   
+
+    
+
+}
+
+#img-control{
+    width :100%; 
+    height: 100% ;
+    overflow:hidden; 
+    object-fit: cover;
+    border-top-right-radius: 4px;
+    border-top-left-radius: 4px;
+    aspect-ratio: 1;
+
+}
+
+.square > img,
+
+.square > .title {
+    /* 還可以簡寫為 grid-area: 1 / 2 */
+    grid-area: 1/ 1 / 2;
+    align-self: end;
+
+    
+
+} 
+
+
+
+
+
+
+.detail{
+    display: flex;
+    align-items: center;
+    justify-content: space-between ;
+    height: 45px;
+    
+    
+}
+
+.mrt{
+       
+    color: #757575;
+    font-family: 'Noto Sans TC';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    margin-left: 10px;
+    
+}
+
+.tag{
+
+    
+    
+    color: #757575;
+    font-family: 'Noto Sans TC';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    margin-right: 10px;
+    
+
+
+}
+
+
+/* .footer-pic{
+    width: 100%;
+} */
+
+.footer{
+    height: 10vh;
+    background-image: url("footer.jpg");
+    background-position:top center;
+    background-size: cover;
+
+}
+
+.warn_box{
+    
+    font-family: 'Noto Sans TC';
+    font-style: normal;
+    font-weight: 700;
+    text-align: center;
+    color: #2d3d45;   
+    font-size: 50px; 
+    width: 1200px;
+    padding-bottom: 54px;
+    
+}
+
+
+
+/* computer tablet RWD */
+@media (max-width:1200px){
+  
+    .nav_bar{
+        width: 90%;
+    }
+  
+    .search_bar{
+        width: 460px;
+    }
+    /* .input{
+        width: 80%;
+    } */
+
+
+    .slogan{
+        flex-wrap: wrap;
+        width: 90%;
+        height: auto;   
+  
+        
+    }
+
+    .content-1{
+        width: 90%;
+    }
+
+    .square{
+        width: 45%;
+    }
+
+    
+
+     /* .content{
+        flex-wrap: wrap;
+        width: 80%;
+        height:auto;
+        grid-template-columns: 1fr 1fr ;
+        grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr ;
+
+    }
+     */
+
+}
+
+@media (max-width:600px){
+    .nav_title{
+        font-size: 30px;
+        padding-left: 10px;
+    }
+
+
+    .search_bar{
+        width: 290px;
+    }
+    .search_card{
+        width: 290px;;
+    }
+
+    .welcome{
+        justify-content: center;
+        align-items: flex-start;
+    }
+
+    #TP101{
+        height: 320px;
+    }
+
+    .slogan{
+        margin-top: 60px;
+        width: 80%;
+    }
+
+    .input{
+        width:230px;
+
+    }
+
+    .content-1{
+        width: 80%;
+    }
+
+    .square{
+        width: 100%;
+        height:280px;
+    }
+
+
+
+    
+}
