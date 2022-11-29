@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset='utf-8' />
+    <meta meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>台北一日遊</title>
+    <link rel="stylesheet" type="text/css" href= "{{ url_for('static',filename='css/index.css') }}">
+
+
+</head>
+
+<style>
+    @import url(https://fonts.googleapis.com/css2?family=Noto+Sans+TC&display=swap);
+</style>
+
+<body class = "body">
+    <div class ="nav">
+        <div class = "nav_bar">
+            <txt class = "nav_title">
+                台北一日遊
+            </txt>
+
+            <div class="top_buttum">
+                <button class = "forNavigation" >預定行程</button><!-- link will be right in <a> -->                                   
+                <button class = "forNavigation" >登入/註冊</button>                    
+            </div>
+        </div>
+    </div>
+
+    <div class = "welcome" >
+
+        <!-- <div id = "TP101" src="/mysource/welcomeTP101.jpg"></div> -->
+        <!-- <img id = "TP101" width="100%" src="/mysource/welcomeTP101.jpg" /> -->
+            <div class="slogan">
+                <div class = "slogan_1" >
+                    輕鬆享受台北一日悠閒
+                    <br/>
+                    <br/>
+                    <br/>
+                </div>                
+                <span class = "slogan_2">探索每個角落，體驗城市的深度旅遊行程</span>
+                
+                
+                <div class = "search_bar">
+                    <input id = "input" class = "input" type = "search" placeholder="輸入景點名稱查詢" name = "search"  required /> <!--onclick ="show_tag();"-->
+                    
+                    <button class = "button_search"  type="submit"> <!--onclick = "keyword_view();"-->
+                        <img src="/mysource/icon-search.png"/>
+                    </button>
+                    <div class = "locate_card">
+                        <!-- <div class = "search_card" >
+                            <button class = "search_text">測試四字</button> 改div試試
+                            <button class = "search_text">測試四字</button>
+                        </div> -->
+                
+                    </div>
+    
+                </div>
+                
+
+
+
+
+            </div>
+
+
+        
+    </div>
+
+
+
+    <div class = "main">
+
+             <!-- ATTN the radius every contents have -->
+        <div class = "content-1">
+            <!-- <div class = "square">
+                <img id = "img-control" alt=""></img>
+                <div class = "title"></div>
+                <div class = "detail">
+                    <div class = "mrt"></div>
+                    <div class = "tag"></div>
+                </div>
+            </div> -->
+
+        </div>
+
+    </div>
+
+    <!-- main js -->
+    
+    
+
+
+    <div class = "footer">
+        <!-- <img class = "footer-pic" src="mysource/footer.jpg"/> -->
+
+    </div>
+
+
+
+
+</body>
+
+<script type="text/javascript" src="mysource/index.js"></script>
+
+</html>
