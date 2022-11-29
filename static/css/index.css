@@ -351,6 +351,18 @@ body{
 
 }
 
+.warn_box{
+    
+    font-family: 'Noto Sans TC';
+    font-style: normal;
+    font-weight: 700;
+    text-align: center;
+    color: #2d3d45;   
+    font-size: 50px; 
+    width: 1200px;
+    padding-bottom: 54px;
+    
+}
 
 
 

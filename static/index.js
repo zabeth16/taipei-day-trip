@@ -156,6 +156,8 @@ button_search = document.querySelector(".button_search")
 async function keyword_load(){
     keyword = document.querySelector(".input").value
     console.log(keyword)
+    
+
     isLoading = true ;
     const response = await fetch(`/api/attractions?page=0&keyword=${keyword}`);
     const data = await response.json();
@@ -163,6 +165,19 @@ async function keyword_load(){
     nextPage = data.nextPage ;
     data_list = data.data;
     append_view(data_list);
+
+    
+    if (data_list.length === 0){
+        console.log("沒有這個景點")
+        main = document.querySelector(".content-1")
+        warn = document.createTextNode("沒有這個景點")
+        warn_box = document.createElement("div")
+        warn_box.className = "warn_box"
+       
+
+        warn_box.appendChild(warn)
+        main.appendChild(warn_box)
+    }
     
 
 }
@@ -180,6 +195,7 @@ button_search.addEventListener('click',() =>{
         content.removeChild(content.firstChild)  
     
     };
+
 
     keyword_load();
     // nextPage = 0
@@ -203,7 +219,7 @@ let append_view = (data_list) =>{
     // console.log(data_list)
     
     //isLoading = true;
-                
+    
          
 
         for (i = 0 ; i < data_list.length  ; i ++ ){
@@ -277,6 +293,8 @@ let append_view = (data_list) =>{
             isLoading = false ;
             console.log(isLoading);
             console.log("取消觀察，以免又觸發下一個 request");
+
+            
             // observer.unobserve(listEnd);
             // observer.disconnect(); 
             // nextPage = 0
@@ -340,32 +358,6 @@ async function load_view(entries){
     
 };
     
-    
-//     if (nextPage === null || isLoading === true){
-//         return console.log("不要動!");
-//     }
-
-//     if (keyword !== ""){ 
-        
-//         url = `/api/attractions?page=${nextPage}&keyword=${keyword}`
-//     }
-//     else{
-        
-//         url = `/api/attractions?page=${nextPage}`
-//     }
-//     isLoading = true ;
-//     const response = await fetch(url);    
-//     const data = await response.json();
-    
-    
-//     // 產生 nextPage 數字
-//     nextPage = data.nextPage;
-//     data_list = data.data;
-
-//     append_view(data_list);
-   
-
-// }
 
 
 console.log(window.innerHeight)
