@@ -96,7 +96,7 @@ search_card = document.querySelector(".search_card")
 search_text = document.querySelector(".search_text")
 lo_card = document.querySelector(".locate_card")
 
-lo_card.addEventListener("click",get_btn = (e)=>{
+lo_card.addEventListener("click",get_btn = (e)=>{ //其實也沒用到什麼get_btn函式
     // 先解決冒泡，不會點了消失
     e.stopPropagation(lo_card)
     
@@ -202,6 +202,21 @@ button_search.addEventListener('click',() =>{
     
 });
 
+/*====================*/
+/*  點擊傳送至attraction頁面  */
+
+let square = document.querySelector(".square")
+
+content.addEventListener("click" , (e) =>{
+    
+    e.stopPropagation(square)
+    // console.log(e.target)
+    // 恩......都抓到子元素
+
+    
+    },
+);
+
 
 
 
@@ -211,7 +226,7 @@ button_search.addEventListener('click',() =>{
 // 重寫測試全域區
 
 
-
+let count = 0
 // 普通 page 頁
 
 let append_view = (data_list) =>{
@@ -220,11 +235,12 @@ let append_view = (data_list) =>{
     
     //isLoading = true;
     
-         
+    
+    
 
         for (i = 0 ; i < data_list.length  ; i ++ ){
                 
-
+            
 
             // create container square
 
@@ -276,11 +292,24 @@ let append_view = (data_list) =>{
                 detail.appendChild(cat_box)
                 square.appendChild(detail)
 
+                let a = document.createElement("a")
+                // for (i = 1 ; i < data.data.length ; i ++)
+                console.log(data.length)
+                
+                a.href = "/attraction/" + (i+1 * (data.length * count ) + 1 )
+                // console.log(a)
+                
+
+                content.appendChild(a)
+                a.appendChild(square)
+
+
+
                
 
         }; 
 
-
+        count ++
 
         //for end
         console.log("實際nextPage" , nextPage);
