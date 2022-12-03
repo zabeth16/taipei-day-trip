@@ -22,10 +22,8 @@ async function web_load() {
 
 
 // let addEvent to call this function
-window.onload = web_load();
+window.onload = web_load() ;
 // ============== ATTN ===============
-
-
 
 
 
@@ -43,7 +41,12 @@ function append_view(data){
 
     //  description = data[0].description
     //  address = data[0].address
-    //  transport = data[0].transport       
+    //  transport = data[0].transport  
+
+    
+
+    
+    
 
     let info = document.querySelector(".info")    
     let description = document.createTextNode(data[0].description)
@@ -68,6 +71,12 @@ function append_view(data){
     let mrt_div = document.querySelector("#mrt")
     let mrt = document.createTextNode(data[0].mrt)
     mrt_div.appendChild(mrt)
+
+    /* 換網頁頂端title! */
+    
+    document.title = "景點: " + (data[0].name);
+    
+    
 
     //////////////////////////////
 
@@ -104,21 +113,6 @@ function append_view(data){
     
     }
 
-
-
-
-
-    // let small_black = document.createElement("div")
-    // small_black.className = "small-black"
-    // let big_white = document.createElement("div")
-    // big_white.className = "big-white" 
-    // big_white.appendChild(small_black)
-    // big_white.setAttribute("onclick" , "current")
-
-
-    // circle_box.appendChild(big_white)    
-
-    
 
     // 如果有多的就創造其餘總數的白圓
     // 黑圓也要看他是不是當下的
