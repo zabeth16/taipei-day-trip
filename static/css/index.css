@@ -432,21 +432,16 @@ a{
         width: 90%;
     }
 
-    .square{
+    a{
         width: 45%;
     }
 
+    /* .square{
+        width: 45%;
+    } */
+
     
 
-     /* .content{
-        flex-wrap: wrap;
-        width: 80%;
-        height:auto;
-        grid-template-columns: 1fr 1fr ;
-        grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr ;
-
-    }
-     */
 
 }
 
@@ -492,7 +487,10 @@ a{
         height:280px;
     }
 
-
+    a{
+        width: 100%;
+        margin-top: 30px;
+    }
 
     
 }
