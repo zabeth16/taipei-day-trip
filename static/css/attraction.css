@@ -493,17 +493,20 @@ hr{
 
 @media (max-width:600px){
     .section{
-        margin-bottom: 254px;
+        
+        width: 100%;
     }
 
     .slideshow-container{
-        height: 250px;
+        height: 360px;
     }
 
     .profile{
-        margin-left: 0px;
+        margin-left: 10px;
+        margin-right: 10px;
         height: auto;
         width: 100%;
+
     }
 
     .booking_area{
