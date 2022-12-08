@@ -121,7 +121,7 @@ def auth():
 			email = user["email"]
 			password = user["password"]
 
-			mycursor.execute('SELECT * FROM member WHERE email = %s ', (email ,))
+			mycursor.execute('SELECT * FROM member WHERE email = %s AND password = %s', (email , password))
 			check_email = mycursor.fetchall()
 
 			
