@@ -4,6 +4,7 @@ from flask import (Flask, jsonify, redirect, render_template, request, session,
 
 import json
 import math
+import jwt
 
 
 
@@ -19,7 +20,7 @@ app = Flask(
 app.config["JSON_AS_ASCII"] = False
 app.config["TEMPLATES_AUTO_RELOAD"] = True
 
-# 加這行讓 API 的順序變成一樣的喔
+# 加這行讓 API 的json顯示順序變成一樣的喔
 app.config["JSON_SORT_KEYS"] = False
 
 
@@ -29,6 +30,150 @@ app.config["JSON_SORT_KEYS"] = False
 def index():
 	return render_template("index.html")
 
+
+
+# ====== 註冊會員 api ======
+@app.route("/api/user" , methods = ["POST"])
+def register():
+	try:
+		con = pool.get_connection()
+		mycursor = con.cursor(dictionary = True)
+		
+		 
+		user = request.get_json()		
+
+		name = user["name"]
+		email = user["email"]
+		password = user["password"]
+	
+		# 只有單個參數時，後方逗號是必要的
+		mycursor.execute('SELECT email FROM member WHERE email = %s ', (email,))
+		check_email = mycursor.fetchall()
+
+		# print(len(check_email))
+
+
+
+		# 還要製作 INSERT table
+		if (len(check_email) == 0  and name != "" and email != "" and password != ""):
+			mycursor.execute('INSERT INTO member (name, email , password) VALUES (%s,%s,%s)',(name,email,password))
+			con.commit()
+			print(mycursor.rowcount, "was inserted.")
+			return jsonify({ "ok": True	})
+
+		# 檢查客戶端提交的註冊資料
+		elif (len(check_email) > 0):	
+			return jsonify({"error" : True ,
+							"message" : " 有重複的email喔，請換另一個信箱註冊。  "}) , 400
+
+		else : 
+			return jsonify({"error" : True ,
+							"message" : " 註冊欄位不能為空喔 ! "}) , 400
+
+
+
+	except:
+		
+			return jsonify({	"error": True ,
+  								"message": "伺服器伍佰老師不想和你跳LAST DANCE"}) , 500
+
+
+	
+	finally:
+		con.close()
+		mycursor.close()
+
+
+# ====== 【登入、驗證、登出】會員 api ======
+
+@app.route("/api/user/auth" , methods = ["GET" , "PUT" , "DELETE"])
+def auth():
+	try:	
+
+
+		con = pool.get_connection()
+		mycursor = con.cursor(dictionary = True)
+
+		
+
+		if  request.method == "GET" :
+			# GET 我 cookie 的 token
+			cookie_token = request.cookies.get("token")
+			# print(cookie_token)
+			# 解密驗證JWT
+			
+
+			# 顯示驗證後的JWT內容
+			# print(decoded)
+
+			if(cookie_token) :
+				decoded = jwt.decode(cookie_token, secret_key, algorithms = "HS256" )
+				return decoded
+			else:
+				return jsonify({"data": None})
+			
+
+			
+
+		elif request.method == "PUT" :
+
+			user = request.get_json()
+			email = user["email"]
+			password = user["password"]
+
+			mycursor.execute('SELECT * FROM member WHERE email = %s AND password = %s', (email , password))
+			check_email = mycursor.fetchall()
+
+			
+			if ( len(check_email) > 0 and email != "" and password != ""):
+
+				name = check_email[0]["name"]
+				id = check_email[0]["id"]
+
+				user_info = {"data" :
+								{ "id" : id , "name" : name  , "email" : email }}
+				print(user_info)
+
+				token = jwt.encode(user_info, secret_key , algorithm = "HS256" )
+				# print(token)
+			
+
+
+				response = jsonify({ "ok": True })
+				response.set_cookie("token", token , max_age = 7 * 24 * 60 * 60)
+				
+
+				return response
+
+			elif (len(check_email) == 0  and email != "" and password != ""):
+				return jsonify({"error" : True ,
+								"message" : " 帳號或密碼輸入錯誤 ! "}) , 400
+
+			else:
+				return jsonify({"error" : True ,
+								"message" : " 登入欄位不能為空喔 ! "}) , 400
+
+		
+		else: # request.method == DELETE
+			response = jsonify({ "ok": True })
+			response.set_cookie("token", "" , max_age = -1 )
+
+			return response
+
+		
+
+
+	# except:
+	# 	return jsonify({	"error": True ,
+	# 						"message": "伺服器伍佰老師心理的岩漿快要滿滿滿滿滿了出來"}) , 500
+
+	finally:
+		con.close()
+		mycursor.close()
+
+
+
+#==============================================
 
 
 
@@ -167,6 +312,8 @@ def categories():
 @app.route("/api/attraction/<attractionId>")
 def attractionId(attractionId):
 
+	
+
 	try:
 		con = pool.get_connection()
 		mycursor = con.cursor(dictionary = True)
@@ -216,6 +363,10 @@ def attraction(id):
 
 
 
+
+
+
+
 @app.route("/booking")
 def booking():
 	return render_template("booking.html")
@@ -230,6 +381,9 @@ def thankyou():
 
 # 建立一個密鑰，內容可以隨便打，session 用
 app.secret_key = "anyway, that is a secrect"
+
+# 給JWT用的密鑰
+secret_key = "the key for JWT "
 
 
 # ============================================

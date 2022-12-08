@@ -22,10 +22,51 @@
 
             <div class="top_buttum">
                 <button class = "forNavigation" >預定行程</button><!-- link will be right in <a> -->                                   
-                <button class = "forNavigation" >登入/註冊</button>                    
+                <button class = "forNavigation" id = "login_signup" >登入/註冊</button>                    
             </div>
         </div>
     </div>
+
+    <div class = "dialog-background" style="display: none;">
+        <div class = "dialog-signup"   style="display : none ;">
+            <div class = "decorator-bar"></div>
+            <div class = "dialog-main" >
+                <txt class = "dialog-title">
+                    註冊會員帳號
+                    <img class = "icon_close" src = "/mysource/icon_close.png" />
+                </txt>
+                <input class = "dialog-input" id = "name" type="text" name = "name" placeholder = "輸入姓名" required />
+                <input class = "dialog-input" id = "email" type="text" name = "email" placeholder = "輸入email" required />
+                <input class = "dialog-input" id = "password" type="password" name = "password" placeholder = "輸入密碼" required />                
+                <button class = "signup" type="submit">註冊新帳戶</button>
+                <!-- 預留插入警告<txt> -->
+                <txt class = notice></txt>                
+                <button class = "switch-login">已經有帳戶了?點此登入</button>
+            </div>        
+            
+
+        </div>
+
+        <div class = "dialog-login"  >
+            <div class = "decorator-bar"></div>
+            <div class = "dialog-main">
+                <txt class = "dialog-title">
+                    登入會員帳號
+                    <img class = "icon_close_login" src = "/mysource/icon_close.png" />
+                </txt>
+                <input class = "dialog-input" id = "email-login" type="text" name = "email" placeholder = "輸入email" required />
+                <input class = "dialog-input" id = "password-login" type="password" name = "password" placeholder = "輸入密碼" required />
+                <button class = "login">登入帳戶</button>                
+                <!-- 預留插入警告<txt> -->
+                <txt class = notice-login></txt>
+                <button class = "switch-signup">還沒有帳戶?點此註冊</button>
+            </div>
+
+        </div>
+    </div> <!-- dialog-background -->
+
+    
+
 
     <div class = "welcome" >
 
