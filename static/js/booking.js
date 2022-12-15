@@ -1,18 +1,4 @@
 
-/* 每次載入都檢查是否有登入，沒有就導回首頁 */
-window.addEventListener("load" , ()=>{
-    fetch(`/api/user/auth` , {
-        method:"GET"
-    }).then(function(response){
-        return response.josn()
-    })
-    .then(function(data){
-        console.log(data)
-    })
-})
-
-
-
 /* 載入就 fectch 判斷並渲染頁面 */
 window.addEventListener("load" , function(){
     fetch(`/api/booking`,{
