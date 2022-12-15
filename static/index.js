@@ -1,18 +1,11 @@
 // 老師說要放的觀察全域用 api 是否載入
 let isLoading = false;
 
-
-
-
 /*====================*/
-// let page_num = 0 
-
-// let key_page_num = 0
 
 let keyword = ""
 
 let nextPage
-
 
 
 /*====================*/
@@ -23,12 +16,10 @@ async function initialLoad() {
     nextPage = parsedData.nextPage;
     data = parsedData.data;
     append_view(data);
-    // console.log(parsedData.nextPage)
+    
 }
   
 document.addEventListener("DOMContentLoaded", initialLoad);
-
-
 
 
 /*====================*/
@@ -37,20 +28,11 @@ document.addEventListener("DOMContentLoaded", initialLoad);
 
 input = document.querySelector(".input")
 
-
-
-
 input.addEventListener("click",function (Event)  {
     document.querySelector(".locate_card").style.display = "block";
     console.log("召喚!!覆蓋的搜尋卡!");
     
-    Event.stopPropagation(input)  
-    
-    
-    //console.log(document.querySelector(".search_text").textContent)
-
-   
- 
+    Event.stopPropagation(input)    
   
     },false
 
@@ -58,29 +40,6 @@ input.addEventListener("click",function (Event)  {
 
 // 點擊分類景點懶人傳去input欄位
 // EventTarget.value 丟到input裡面! select 標籤的textContent
-
-// document.getElementsByClassName(".search_text").value = input.innerHTML;
-search_text = document.querySelector(".search_text")
-search_card = document.querySelector(".search_card")
-
-
-// ======= onclick 加函式 =========
-// document.getElementsByClassName(".locate_card").onclick = function get_btn(){
-    
-    // let text = document.querySelector(".search_text").textContent
-    // console.log("有沒有點到?")
-    // let btn_text = document.createTextNode(text)
-    
-
-    // input.appendChild(btn_text)
-    // text = input.innerHTML
-
-    // document.getElementsByClassName(".input").innerHTML = ""
-//     document.getElementsByClassName(".input").innerHTML = document.querySelector(".search_text").textContent
-
-// }
-
-
 
 search_card = document.querySelector(".search_card")
 search_text = document.querySelector(".search_text")
@@ -92,9 +51,7 @@ lo_card.addEventListener("click",get_btn = (e)=>{ //其實也沒用到什麼get_
     
     document.querySelector(".locate_card").style.display = "block"
 
-    console.log(e.target.textContent) // 可以找到我點誰的文字!!!
-    // console.log(e.target.textContent.length)
-  
+    // console.log(e.target.textContent) // 可以找到我點誰的文字!!! 
 
     input = document.querySelector(".input")
     if (e.target.textContent.length > 4){
@@ -102,26 +59,9 @@ lo_card.addEventListener("click",get_btn = (e)=>{ //其實也沒用到什麼get_
     }else{
         input.value = e.target.textContent
         document.querySelector(".locate_card").style.display = "none"
-
     }
-    
-
-    
-    // 純粹看怎麼抓我的文字
-    // text_list = document.querySelectorAll(".search_text")
-    
-    // // console.log(text_list[8].textContent)
-    // for (i = 0 ; i < text_list.length ; i++ ){
-    //     text =  text_list[i].textContent
-    //     // console.log(text)
-        
-    // }   
-
-
-
     },false
 )
-
 
 
 
@@ -132,9 +72,6 @@ body.addEventListener("click",() =>{
     // console.log("點擊其他區域隱藏")
     },false
 );
-
-
-
 
 /*====================*/
 // keyword 搜尋結果專區
@@ -217,6 +154,7 @@ content.addEventListener("click" , (e) =>{
 
 
 let count = 0
+let pageNumber = 1
 // 普通 page 頁
 
 let append_view = (data_list) =>{
@@ -279,16 +217,13 @@ let append_view = (data_list) =>{
                 let detail = document.createElement("div");
                 detail.className = "detail";
                 detail.appendChild(mrt_box);
-                detail.appendChild(cat_box)
-                square.appendChild(detail)
+                detail.appendChild(cat_box);
+                square.appendChild(detail);
 
                 let a = document.createElement("a")
-                
-                // console.log(data.length)
-                
-                a.href = "/attraction/" + (i+1 * (data.length * count ) + 1 )
-                // console.log(a)
-                
+                a.className = "attractionLink"      
+                  
+                a.href = "/attraction/" + data_list[i].id;    
 
                 content.appendChild(a)
                 a.appendChild(square)
@@ -297,40 +232,26 @@ let append_view = (data_list) =>{
 
                
 
-        }; 
+        };  //for end   
 
-        count ++
-
-        //for end
-        console.log("實際nextPage" , nextPage);
-        if (nextPage !== null ){ // && isLoading === true
+        
+        
+        if (nextPage !== null ){ 
             console.log("繼續召喚");
             isLoading = false ;
-            console.log(isLoading);
+            // console.log(isLoading);
        
         }else{
             isLoading = false ;
-            console.log(isLoading);
-            console.log("取消觀察，以免又觸發下一個 request");
-
-            
-            // observer.unobserve(listEnd);
-            // observer.disconnect(); 
-            // nextPage = 0
-  
+            // console.log(isLoading);
+            // console.log("取消觀察，以免又觸發下一個 request");
+            // 不要做 unobserve或disconnect ，這樣會造成停滯            
 
             
         } ;
-
-
-
-            
-
-    
     
 
 }; // append_view end
-
 
 
 
@@ -365,13 +286,8 @@ async function load_view(entries){
                     nextPage = data.nextPage;
                     
                     append_view(data.data);
-                }) 
-            
-            
-
-        
- 
-           
+                })     
+      
         };
     });
     
@@ -379,7 +295,7 @@ async function load_view(entries){
     
 
 
-console.log(window.innerHeight)
+// console.log(window.innerHeight)
 view_h = window.innerHeight
 
 // the options for observer
@@ -390,25 +306,12 @@ let options = {
 };
 
 const observer = new IntersectionObserver(load_view, options);
-console.log(new IntersectionObserver(load_view , options ));
+// console.log(new IntersectionObserver(load_view , options ));
 
 
 const listEnd = document.querySelector(".footer");
 
 observer.observe(listEnd);
-
-
-
-
-
-// 看我的scroll高度用的，
-// window.addEventListener('scroll', () => {
-// 	const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
-	
-// 	console.log( { scrollTop, scrollHeight, clientHeight });
-// });
-
-
 
 
 /* search card 區 */
@@ -426,9 +329,8 @@ function show_tag(){
         let locate = document.querySelector(".locate_card");
 
         while (locate.hasChildNodes()) {
-            locate.removeChild(locate.firstChild)    ;                
+            locate.removeChild(locate.firstChild);                
         };
-
 
         locate.appendChild(search_card)
         for (s = 0 ; s <data.data.length ; s++ ){
@@ -436,9 +338,7 @@ function show_tag(){
             search_text.className = "search_text";
             let text = document.createTextNode(data.data[s]);
             search_text.appendChild(text);
-            search_card.appendChild(search_text);
-            
-         
+            search_card.appendChild(search_text);            
             
         };
      
@@ -463,7 +363,7 @@ sign_btn.addEventListener("click" , () =>{
 
     if (sign_btn.innerHTML === "登出系統"){
         document.querySelector(".dialog-background").style.display ="none"
-        console.log("點擊登出")
+        // console.log("點擊登出")
         fetch(`/api/user/auth` , {
             method: "DELETE"
         })
@@ -472,11 +372,8 @@ sign_btn.addEventListener("click" , () =>{
         })
         .then(function(data){
             console.log("登出成功" , data)
-            location.reload();
-            // sign_btn.innerHTML === "登入/註冊"
-
+            location.reload();         
         })
-        
 
     }
 } );
@@ -533,8 +430,6 @@ signup.addEventListener("click" , (event) =>{
         "password" : password
     }
 
-    console.log(request_entry)
-
     fetch(`/api/user` , {
         method:"POST",
         credentials:"include",
@@ -568,9 +463,7 @@ signup.addEventListener("click" , (event) =>{
             dialog_main.classList.add("high-main")
         }
 
-
-    });
-  
+    });  
 
 });
 
@@ -587,7 +480,6 @@ login.addEventListener( "click" , (event) =>{
         "password" : password
     }
 
-    console.log(request_entry)
     fetch(`/api/user/auth` , {
         method:"PUT",
         credentials:"include",
@@ -600,17 +492,14 @@ login.addEventListener( "click" , (event) =>{
     .then(function (response){ 
         return response.json()                
     })
-    .then(function(data){
-        // console.log(data)
+    .then(function(data){        
 
         if (data.ok === true){
             
             // 登入成功，重新載入頁面
             location.reload();
-            // console.log(data)
-        }
-
-        else{
+            
+        }else{
             let notice = document.querySelector(".notice-login")
             notice.textContent = data.message
 
@@ -618,9 +507,6 @@ login.addEventListener( "click" , (event) =>{
 
     })
 });
-
-
-
 
 window.addEventListener('load', function() {
 
@@ -631,26 +517,51 @@ window.addEventListener('load', function() {
     .then(function(response){
         return response.json();
     })
-    .then(function(data){
-        // console.log(data.data)
-       
+    .then(function(data){          
 
         if (data.data !== null) {
             // 如果存在 token，我的按鈕要改成登出系統
-            console.log("我的cookie 解密token" , data)
+            // console.log("我的cookie 解密token" , data)
             let button = document.querySelector("#login_signup")
             button.innerHTML = "登出系統"
 
-
         }else{
             // 如果不存在 token，就沒幹嘛
-            console.log("Cookie token does not exist")
+            // console.log("Cookie token does not exist")
+            return
         }
- 
-
-
-    })
-           
+    })          
     
 });
 
+//============================================================
+/* 預定行程區 */
+
+const booking = document.querySelector("#booking")
+
+
+booking.addEventListener("click" , () =>{
+
+    fetch(`/api/user/auth`,{
+        method : "GET"
+    })
+    .then(function(response){
+        return response.json();        
+    })
+    .then(function(data){
+        console.log(data)
+        
+        
+        if (data.data === null){
+            document.querySelector(".dialog-background").style.display = "flex"; 
+        }else{
+            window.location.href = "/booking"
+        }
+
+    })
+    .catch(function(error){
+        console.error(error);
+    });
+
+  
+});

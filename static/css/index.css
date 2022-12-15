@@ -322,7 +322,7 @@ body{
 
 }
 
-a{  
+.attractionLink{  
     /* 用a 包住square 就好了啊!!!! */
     height: 242px;
     width: 270px; 
@@ -576,7 +576,11 @@ a{
     background-color:#FFFFFF ;
 }
 
-
+.back_home{
+    text-decoration: none;
+    margin-top: 10px;
+    margin-bottom: 10px;    
+}
 
 
 /* computer tablet RWD */
@@ -606,7 +610,7 @@ a{
         width: 90%;
     }
 
-    a{
+    .attractionLink{
         width: 45%;
     }
 
@@ -661,7 +665,7 @@ a{
         height:280px;
     }
 
-    a{
+    .attractionLink{
         width: 100%;
         margin-top: 30px;
     }

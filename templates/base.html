@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% block head %}
+    <meta charset='utf-8' />
+    <meta meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}{% endblock title%}</title>
+    <link rel="stylesheet" type="text/css" href= "{{ url_for('static',filename='css/user.css') }}">
+    {% block link %}{% endblock link %}
+    {% endblock head %}
+
+</head>
+
+<style>
+    @import url(https://fonts.googleapis.com/css2?family=Noto+Sans+TC&display=swap);
+</style>
+
+
+<body>
+    
+<div class ="nav">
+    <div class = "nav_bar">
+        <a class = "back_home"  href = "/">
+        <txt class = "nav_title">
+            台北一日遊
+        </txt>
+        </a>
+
+        <div class="top_buttum">
+            <button class = "forNavigation" id = "booking">預定行程</button><!-- link will be right in <a> -->                                   
+            <button class = "forNavigation" id = "login_signup">登入/註冊</button>                    
+        </div>
+    </div>
+</div>
+
+<div class = "dialog-background" style="display: none;">
+    <div class = "dialog-signup"   style="display : none ;">
+        <div class = "decorator-bar"></div>
+        <div class = "dialog-main" >
+            <txt class = "dialog-title">
+                註冊會員帳號
+                <img class = "icon_close" src = "/mysource/icon_close.png" />
+            </txt>
+            <input class = "dialog-input" id = "name" type="text" name = "name" placeholder = "輸入姓名" required />
+            <input class = "dialog-input" id = "email" type="text" name = "email" placeholder = "輸入email" required />
+            <input class = "dialog-input" id = "password" type="password" name = "password" placeholder = "輸入密碼" required />                
+            <button class = "signup" type="submit">註冊新帳戶</button>
+            <!-- 預留插入警告<txt> -->
+            <txt class = notice></txt>                
+            <button class = "switch-login">已經有帳戶了?點此登入</button>
+        </div>        
+        
+
+    </div>
+
+    <div class = "dialog-login"  >
+        <div class = "decorator-bar"></div>
+        <div class = "dialog-main">
+            <txt class = "dialog-title">
+                登入會員帳號
+                <img class = "icon_close_login" src = "/mysource/icon_close.png" />
+            </txt>
+            <input class = "dialog-input" id = "email-login" type="text" name = "email" placeholder = "輸入email" required />
+            <input class = "dialog-input" id = "password-login" type="password" name = "password" placeholder = "輸入密碼" required />
+            <button class = "login">登入帳戶</button>                
+            <!-- 預留插入警告<txt> -->
+            <txt class = notice-login></txt>
+            <button class = "switch-signup">還沒有帳戶?點此註冊</button>
+        </div>
+
+    </div>
+</div> <!-- dialog-background -->
+
+{% block main %}
+{% endblock main %}
+
+
+
+
+
+
+<div class = "footer"></div>
+
+</body>
+
+{% block script %}
+<script type="text/javascript" src="mysource/js/base.js"> </script>
+{% endblock script %}
+
+</html>

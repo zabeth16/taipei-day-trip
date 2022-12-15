@@ -5,6 +5,7 @@ from flask import (Flask, jsonify, redirect, render_template, request, session,
 import json
 import math
 import jwt
+import re
 
 
 
@@ -50,12 +51,20 @@ def register():
 		mycursor.execute('SELECT email FROM member WHERE email = %s ', (email,))
 		check_email = mycursor.fetchall()
 
-		# print(len(check_email))
+		# regex for email
+		pattern_email = r"^\S+@\S+$"
+		re.match(pattern_email,email)
+
+		# regex for password at least 6 length 
+		pattern_password = r"^.{6,}$"
+		re.match(pattern_password , password)
+
+
 
 
 
 		# 還要製作 INSERT table
-		if (len(check_email) == 0  and name != "" and email != "" and password != ""):
+		if (len(check_email) == 0  and name != "" and email != "" and password != ""  and re.match(pattern_email,email) and re.match(pattern_password , password)):
 			mycursor.execute('INSERT INTO member (name, email , password) VALUES (%s,%s,%s)',(name,email,password))
 			con.commit()
 			print(mycursor.rowcount, "was inserted.")
@@ -65,6 +74,11 @@ def register():
 		elif (len(check_email) > 0):	
 			return jsonify({"error" : True ,
 							"message" : " 有重複的email喔，請換另一個信箱註冊。  "}) , 400
+
+		elif (not re.search(pattern_email, email) or re.search(pattern_email, email)):
+			return jsonify({"error" : True ,
+							"message" : " email格式錯誤，且密碼長度需6個字。  "}) , 400
+
 
 		else : 
 			return jsonify({"error" : True ,
@@ -124,6 +138,7 @@ def auth():
 			mycursor.execute('SELECT * FROM member WHERE email = %s AND password = %s', (email , password))
 			check_email = mycursor.fetchall()
 
+
 			
 			if ( len(check_email) > 0 and email != "" and password != ""):
 
@@ -163,9 +178,9 @@ def auth():
 		
 
 
-	# except:
-	# 	return jsonify({	"error": True ,
-	# 						"message": "伺服器伍佰老師心理的岩漿快要滿滿滿滿滿了出來"}) , 500
+	except:
+		return jsonify({	"error": True ,
+							"message": "伺服器伍佰老師心理的岩漿快要滿滿滿滿滿了出來"}) , 500
 
 	finally:
 		con.close()
@@ -175,7 +190,180 @@ def auth():
 
 #==============================================
 
+# ====== booking api ======
+@app.route("/api/booking" , methods = ["GET" , "POST" , "DELETE"] )
+def booking_trip():
+	try:
+		con = pool.get_connection()
+		mycursor = con.cursor(dictionary = True)
 
+		cookie_token = request.cookies.get("token")
+
+		if  request.method == "GET" :
+			
+			if (cookie_token):
+				decoded = jwt.decode(cookie_token, secret_key, algorithms = "HS256" )
+				id =  decoded["data"]["id"]
+				mycursor.execute('SELECT id FROM member WHERE id = %s' , (id ,))
+				member_id = mycursor.fetchone()["id"]
+
+				
+
+				mycursor.execute(
+								'SELECT attractionId , date , time , price\
+								FROM reservation \
+								WHERE memberId = %s' , (member_id ,))			
+
+				reservation = mycursor.fetchone()	
+				# print(reservation) 
+
+				if reservation != None :			
+
+					id = reservation["attractionId"]
+					date = reservation["date"]
+					date_str = date.strftime("%Y-%m-%d")
+					# 有datetime問題請用date_str = date_obj.strftime("%Y-%m-%d")
+					# strftime函數將datetime.date對象轉換為字符串
+
+
+					time = reservation["time"]
+					price = reservation["price"]
+
+					mycursor.execute('SELECT name , address , images FROM travel \
+									WHERE id = %s' , ( id ,))
+					travel = mycursor.fetchone()
+					name = travel["name"]
+					address = travel["address"]
+					images = travel["images"]
+					image = images.split(" ")[0]
+
+					
+
+
+					
+					return ({ "data" : {
+							"attraction" :{
+								"id":  id,
+								"name": name ,
+								"address": address,
+								"image": image
+							} },
+								"date": date_str,
+								"time": time,
+								"price": price		})
+				else:
+					return ({ "data" : None })			
+				
+
+
+			else:
+				return ({
+							"error": True,
+							"message": "未登入系統，拒絕存取"
+							}) , 403
+
+		elif request.method == "POST" :
+
+			trip_reservation = request.get_json()
+			print(trip_reservation)
+			attractionId = trip_reservation["attractionId"]
+			date = trip_reservation["date"]
+			time = trip_reservation["time"]
+			price = trip_reservation["price"]
+
+			if (date == ""):
+				return ({
+							"error": True,
+							"message": "日期不可為空"
+							}) , 400
+
+			elif (not cookie_token):
+				return ({
+						"error": True,
+						"message": "未登入系統，拒絕存取"
+						}) , 403
+			
+			else:
+				# 把預定行程放資料庫，且用inner join放進需要的會員資訊		
+				# def post_booking():	
+				decoded = jwt.decode(cookie_token, secret_key, algorithms = "HS256" )
+				id =  decoded["data"]["id"]
+				mycursor.execute('SELECT id FROM member WHERE id = %s' , (id ,))
+				member_id = mycursor.fetchone()["id"]
+				
+				
+				mycursor.execute(
+					'UPDATE reservation SET attractionId=%s,date=%s,time=%s,price=%s , memberId=%s  \
+					WHERE id = 1 ' \
+					, (attractionId , date , time , price , member_id))
+				
+				con.commit()
+				print(mycursor.rowcount, "was updated.")
+
+				
+
+				return  ({"ok" : True})
+
+		else: # DELETE method
+			mycursor.execute('UPDATE reservation SET attractionId=NULL ,date=NULL ,time=NULL ,price=NULL  , memberId=NULL \
+				WHERE id = 1 ')
+			
+			con.commit()
+			print(mycursor.rowcount , "was delete.")
+		
+
+
+			return ({"ok" : True })
+
+	# except:
+	# 	return jsonify({	"error": True ,
+	# 						"message": "伺服器伍佰老師表示上帝救救我"}) , 500
+
+	finally:
+		con.close()
+		mycursor.close()
+
+#==============================================
+
+
+@app.route("/booking")
+def booking():
+	try:
+		con = pool.get_connection()
+		mycursor = con.cursor(dictionary = True)
+		cookie_token = request.cookies.get("token")
+
+		if (cookie_token):	
+			decoded = jwt.decode(cookie_token, secret_key, algorithms = "HS256" )	
+			id =  decoded["data"]["id"]
+			mycursor.execute('SELECT name FROM member WHERE \
+							id = %s' , (id ,))
+			name = mycursor.fetchone()					
+
+			
+			return render_template("booking.html"  , name = name["name"] , )
+
+		else:
+			return redirect("/")
+
+
+	# except:
+	# 	return jsonify({	"error": True ,
+	#  						"message": "伺服器伍佰老師表示上帝救救我"}) , 500
+
+
+	finally:
+		con.close()
+		mycursor.close()
+		
+
+
+
+
+
+
+
+#==============================================
 
 @app.route("/api/attractions")
 def attractions():
@@ -367,9 +555,7 @@ def attraction(id):
 
 
 
-@app.route("/booking")
-def booking():
-	return render_template("booking.html")
+
 @app.route("/thankyou")
 def thankyou():
 	return render_template("thankyou.html")
