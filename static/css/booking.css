@@ -244,10 +244,11 @@ input{
     .content{
         justify-content: flex-start;
         margin-left: 10px;
+        width: 90%;
     }
     .headline{
         width: 90%;
-        margin-left: 10px;
+        
     }
     .img{
         width: 100%;
