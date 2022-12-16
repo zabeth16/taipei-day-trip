@@ -112,16 +112,11 @@ function append_view(data){
         circle_box.appendChild(dot)
     
     }
-
-
-    // 如果有多的就創造其餘總數的白圓
-    // 黑圓也要看他是不是當下的
-
-
+   
     // 我每個景點有幾張圖?
     // console.log(data[0].images.length)
 
-    //////////////////////////////
+    
     showSlides(slideIndex);
 
 }; //append_view()  end
@@ -197,3 +192,104 @@ big_day.addEventListener("click" , (event) =>{
 );
 
 // ===========================================
+
+const bookingBtn = document.querySelector(".booking-btn")
+
+// 設定 input 元素的 value 為當前日期
+
+
+bookingBtn.addEventListener("click" , () =>{
+    let id = number
+    let date = document.querySelector(".calender").value
+
+    // document.getElementById('.calender').value = new 
+    // Date().toISOString().substr(0, 10)
+        
+    // time 用錢弄出來
+    let fee = document.querySelector(".fee").textContent
+    let feeWord = fee.split("新台幣")   
+    let money = feeWord[1].replace('元', '')
+    let time = "morning"
+    if (money === "2000"){
+        time = "morning"
+        
+    }else{
+        time = "afternoon"        
+    }
+
+    let request_entry = {
+        "attractionId": id,
+        "date": date,
+        "time": time,
+        "price": money
+    }
+
+    fetch(`/api/booking` ,{
+        method:"POST",
+        credentials:"include",
+        body:JSON.stringify(request_entry), //// 使用 JSON.stringify 方法將 JSON 格式的資料轉換成字串
+        cache:"no-cache",
+        headers: new Headers({
+            "content-type":"application/json"
+        })
+    })
+    .then(function(response){
+        return response.json()
+    })
+    .then(function(data){
+
+        console.log(Object.keys(data)[0])
+        if (Object.keys(data)[0] === "ok"){
+            // 有驗證成功才去booking頁面
+            window.location.href = "/booking";
+        }
+        else if (data.message === "日期不可為空" ){
+            console.log(data.message);
+            const dateNotice = document.querySelector(".date-notice")
+            dateNotice.style.display = "block"
+            dateNotice.textContent = data.message
+            const bookingArea = document.querySelector(".booking_area")
+            bookingArea.classList.add("high-date-notice")
+        }else{
+            // 未登入要彈給他登入
+            document.querySelector(".dialog-background").style.display = "flex";
+
+        }
+
+
+        
+    });
+
+});
+
+//============================================================
+/* 預定行程區 */
+
+const booking = document.querySelector("#booking")
+
+
+booking.addEventListener("click" , () =>{
+
+    fetch(`/api/user/auth`,{
+        method : "GET"
+    })
+    .then(function(response){
+        return response.json();        
+    })
+    .then(function(data){
+        console.log(data)
+        
+        
+        if (data.data === null){
+            document.querySelector(".dialog-background").style.display = "flex"; 
+        }else{
+            window.location.href = "/booking"
+        }
+
+    })
+    .catch(function(error){
+        console.error(error);
+    });
+
+  
+});

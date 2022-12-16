@@ -23,7 +23,7 @@
             </a>
 
             <div class="top_buttum">
-                <button class = "forNavigation" >預定行程</button><!-- link will be right in <a> -->                                   
+                <button class = "forNavigation" id = "booking">預定行程</button><!-- link will be right in <a> -->                                   
                 <button class = "forNavigation" id = "login_signup">登入/註冊</button>                    
             </div>
         </div>
@@ -75,14 +75,7 @@
                 <!-- </div> -->
                 <img class = "left-A" src="/mysource/left-A.png" />
                 <img class = "right-A" src="/mysource/right-A.png"/>
-                <div class = "circle-box">
-                  
-                    <!-- <div class = "big-white">
-                        <div class = "small-black"></div>
-                    </div>
-                    <div class = "big-white"> -->                        
-                    <!-- </div> -->
-                </div>              
+                <div class = "circle-box"></div>              
 
 
             </div>
@@ -105,8 +98,10 @@
                     <div class = "booking-date">
                         <txt class = "booking-choose">訂購日期 :</txt>
                         <input type = "date" class = "calender"></input>
+                        
                     </div>
-
+                    <txt class = "date-notice" style="display: none;"></txt>
+                    
                     <div class = "booking-time">
 
                         <txt class = "booking-choose">選擇時間 :</txt>

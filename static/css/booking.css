@@ -1,0 +1,343 @@
+.headline{
+    font-family: 'Noto Sans TC';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 19px;
+    color: #666666;
+    width: 100%;
+}
+.empty-buttom{
+    margin-bottom: 30px;
+}
+.main{
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 96px;    
+    height: auto;
+    flex-wrap: wrap;
+}
+
+.content{
+    width: 1000px;    
+    flex-wrap: wrap;
+    display: flex;
+    color: #666666;
+}
+
+.section{
+    margin-top: 30px;
+    width: 980px;    
+    display: flex;
+}
+
+.img{    
+    width: 266px;
+    height: 200px;
+    left: -8px;
+    top: 0px;  
+
+}
+
+
+.trip-info{
+    width: 700px;
+    height: auto;    
+    margin-left: 22px;
+}
+
+.trip-title{
+    height: 14px;
+
+    font-family: 'Noto Sans TC';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 13px;
+    color: #448899;
+}
+
+.title{
+    height: 14px;
+
+    font-family: 'Noto Sans TC';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 13px;
+    color: #448899;
+}
+
+.info-detail{
+    margin-top: 25px;
+    font-family: 'Noto Sans TC';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    color: #666666;
+    display: flex;
+    flex-wrap: wrap;
+}
+.date{
+    width: 90%;
+    font-family: 'Noto Sans TC';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    display: inline-block;
+    margin-bottom: 20px;
+    margin-left: 5px;
+}
+
+.time{
+    width: 90%;
+    font-family: 'Noto Sans TC';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    display: inline-block;
+    margin-bottom: 20px;
+    margin-left: 5px;
+}
+
+.fee{
+    width: 90%;
+    font-family: 'Noto Sans TC';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    display: inline-block;
+    margin-bottom: 20px;
+    margin-left: 5px;
+}
+
+.address{
+    width: 88%;
+    font-family: 'Noto Sans TC';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    display: inline-block;
+    margin-bottom: 20px;
+    margin-left: 5px;
+}
+
+hr{
+    width: 1200px;
+    height: 0px;
+    border: 1px solid #E8E8E8;
+    margin: 40px 0px;
+}
+
+.contact{
+    width: 980px;
+    height: 227px;
+    
+}
+
+
+.contact-title{
+    font-family: 'Noto Sans TC';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 19px;
+    color: #666666;
+    margin-bottom: 24px;
+}
+
+.input-title{
+    font-family: 'Noto Sans TC';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    color: #666666;
+}
+
+input{
+    width: 200px;
+    height: 36px;
+    padding-left: 10px;
+    border-radius: 5px;   
+    color: #000000;
+    border: 1px solid #E8E8E8;
+    margin-bottom: 15px;
+}
+
+.phone-notice{
+    margin-top: 5px;
+    font-family: 'Noto Sans TC';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    color: #666666;
+}
+
+.payment{
+    width: 980px;
+    height: 227px;    
+}
+
+.confirm{
+    width: 980px;
+    height: 100px;    
+    display: flex;
+    flex-wrap: wrap;
+    justify-content:flex-end;
+}
+
+.confirm-fee{
+    font-family: 'Noto Sans TC';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    color: #666666;
+    margin-bottom: 25px;
+    width: 100%;
+    text-align: end;    
+    
+}
+
+.confirm-button{
+    background: #448899;
+    border-radius: 5px;
+    width: 173px;
+    height: 36px;
+    font-size: 19px;
+    line-height: 19px;
+    font-family: 'Noto Sans TC';
+    font-style: normal;
+    font-weight: 400;
+    color: #FFFFFF;
+    border: none;   
+}
+
+.icon_delete{
+    float: right;
+    cursor: pointer;
+}
+
+.footer{
+    margin-top: 60px;
+    display: flex;
+    justify-content: center;
+    background-color: #757575;;
+}
+
+
+.footerTxt{
+    font-family: 'Noto Sans TC';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    text-align: center;
+    color: #FFFFFF;
+    margin-top: 45px;
+}
+
+@media (max-width:1200px) {
+    .section{
+        width: 90%;
+        flex-wrap: wrap;
+    }
+
+    .content{
+        justify-content: flex-start;
+        margin-left: 10px;
+        width: 90%;
+    }
+    .headline{
+        width: 90%;
+        
+    }
+    .img{
+        width: 100%;
+        height: 50%;
+        object-fit: cover;
+        overflow: hidden;
+        margin-bottom: 30px;
+    }
+
+    .trip-info{
+        position: relative;
+        margin-left: 0;
+    }
+    .icon_delete {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        cursor: pointer;
+    }
+
+    .contact{
+        width: 90%;
+        height: 270px;
+    }
+    .payment{
+        width: 90%;
+    }
+    .confirm{
+        width: 90%;
+    }
+    hr{
+        width: 90%;
+    }
+    .hr-payment {
+        margin-top: 40px !important ;
+    }
+
+
+
+}
+
+
+@media (max-width:600px) {
+    .section{
+        height: 180%;
+    }
+
+    .date{
+        width: 85%;
+    }
+    .time{
+        width: 85%;
+    }
+    .fee{
+        width: 85%;
+    }
+    .address{
+        width: 70%;
+    }
+
+    .footer{
+        height:360px;
+    }
+
+}
+
+
+@media (max-width:400px){
+    .nav_title{
+        font-size: 25px;
+    }
+    .date{
+        width: 75%;
+    }
+    .time{
+        width: 75%;
+    }
+    .fee{
+        width: 75%;
+    }
+    .address{
+        width: 75%;
+    }
+
+
+    .confirm{
+        width: 80%;
+    }
+    hr{
+        width: 80%;
+    }
+}

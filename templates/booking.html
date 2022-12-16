@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+
+{% block title %}我的預定行程{% endblock %}
+{% block link %}<link rel="stylesheet" type="text/css" href= "{{ url_for('static',filename='css/booking.css') }}">{% endblock link %}
+
+{% block main %}
+
+<div class = "main">
+    <div class="content">
+        <txt class = "headline">您好，{{ name }} ，待預定的行程如下:</txt>
+    </div>
+    <div class="section">
+        <img class = "img" />
+        <div class = "trip-info">
+            <img class = "icon_delete" src="mysource/img/icon_delete.png"/>
+            <div class = "trip-title">
+                台北一日遊 : 
+                <txt class = "title"></txt>               
+            </div>
+            <div class = "info-detail">
+                日期 :
+                <txt class = "date"></txt>
+                時間 :
+                <txt class = "time"></txt>
+                費用 :
+                <txt class = "fee"></txt>
+                地點 :
+                <txt class = "address"></txt>                
+            </div>       
+
+        </div>
+
+    </div><!-- section end-->
+
+    <hr/>
+
+    <div class="contact">
+        <div class = "contact-title">聯絡人資訊</div>
+        <div class = "input-title">
+            聯絡姓名 : 
+            <input type="text" class="name"/>
+            <br>
+            聯絡信箱 :
+            <input type="email" class="email"/> <!-- 記得用正則表達式 -->
+            <br>
+            手機號碼 :
+            <input type="tel" class="phone"/>
+            <br>
+            <div class = "phone-notice">請保持手機暢通，準時到達，導覽人員將用手機與您聯繫，務必留下正確的聯絡方式。</div>
+
+        </div>
+
+    </div><!--contact end-->
+
+    <hr class = "hr-payment"/>
+    <div class = "payment">
+        <div class = "contact-title">信用卡付款資訊</div>
+        <div class = "input-title">
+            卡片號碼 :
+            <input type="password" class="card-number"/> <!-- 要注意每4個 * 間格-->
+            <br>
+            過期時間 :
+            <input type="month" class="card-number"/>
+            <br>
+            驗證密碼 :
+            <input type="password" class="card-number"/> <!-- 要注意長度限制只有3個-->
+        </div>
+    </div>
+
+    <hr/>
+
+    <div class = "confirm">
+        <div class = "confirm-fee">總價 : </div>
+        
+        <button class = "confirm-button" type = "button">確認訂購並付款</button>
+
+    </div>
+
+
+
+    
+    
+</div>
+
+
+{% endblock main %}
+
+<!-- remember to recover the footer-->
+
+{% block script %}
+<script type="text/javascript" src ="mysource/js/booking.js"></script>
+<script type="text/javascript" src = "mysource/js/base.js"></script>
+{% endblock script %}

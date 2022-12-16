@@ -1,3 +1,75 @@
+body{
+    margin: 0;
+    padding: 0;
+    background-color: #ffffff;
+    font-family: 'Noto Sans TC', cursive;
+}
+
+
+
+.nav{
+    /*固定頂端*/
+    background-color: #ffffff;
+    display: flex;
+    
+    align-items: center;
+    top:0;
+    justify-content: center;
+    position: fixed;
+    width: 100%;
+    z-index: 1; /*第一層*/
+    
+} 
+
+
+.nav_bar{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 1200px;
+    justify-content: space-between ;
+
+}
+
+.nav_title{
+    
+    justify-content: flex-start;
+    text-align: center;
+    font-family: 'Noto Sans TC';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 34px;
+    line-height: 34px;
+    color: #448899;
+    margin-top: 10px;
+    margin-bottom:10px;
+    
+
+
+}
+
+
+.top_buttum{
+    
+    display: flex ;
+    justify-content: flex-end;
+    flex-direction: row;
+
+}
+
+.forNavigation{
+    font-family: 'Noto Sans TC';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 16px;
+    width: 84px;
+    color: #666666 ;
+    border:none;
+    background-color: #FFFFFF;
+    cursor:pointer;
+    /* height: 34px; */
+}
 
 .dialog-background{
     background-color: rgb(0, 0, 0 , 0.25);    
@@ -170,3 +242,21 @@
     color: #666666;
     background-color:#FFFFFF ;
 }
+
+
+.footer{
+    height: 10vh;
+    background-image: url("/mysource/img/footer.jpg");
+    background-position:top center;
+    background-size: cover;
+
+}
+
+
+
+.back_home{
+    text-decoration: none;
+    margin-top: 10px;
+    margin-bottom: 10px;   
+    text-decoration: none;
+}  
