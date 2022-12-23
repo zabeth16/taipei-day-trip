@@ -1,0 +1,55 @@
+.main{        
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 96px;    
+    height: auto;
+    flex-wrap: wrap;
+
+}
+.content{
+    width: 1200px;
+    height: 500px;
+    /* display: flex;
+    justify-content: center;
+    flex-wrap: wrap; */
+    font-family: 'Noto Sans TC';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    color: #434343;
+    text-align: center;
+    background-image: url("/mysource/img/thankyou.png");
+    background-repeat: no-repeat;
+    /* background-size: cover; */
+}
+
+.result{
+    width: 10%;
+  
+}
+
+.contact{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 30px;
+}
+/* .name{
+    width: 50%;
+}
+.email{
+    width: 50%;
+}
+.phone{
+    width: 50%;
+} */
+.order{
+    margin-top: 30px;
+}
+
+.detail{
+    width: 100%;
+    margin-top: 10px;
+}

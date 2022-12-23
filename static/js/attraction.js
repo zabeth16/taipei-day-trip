@@ -43,11 +43,6 @@ function append_view(data){
     //  address = data[0].address
     //  transport = data[0].transport  
 
-    
-
-    
-    
-
     let info = document.querySelector(".info")    
     let description = document.createTextNode(data[0].description)
     info.appendChild(description)
@@ -69,7 +64,10 @@ function append_view(data){
     tag_div.appendChild(tag)
 
     let mrt_div = document.querySelector("#mrt")
-    let mrt = document.createTextNode(data[0].mrt)
+    if (data[0].mrt === null){
+        data[0].mrt = "無捷運站"
+    }
+    let mrt = document.createTextNode(data[0].mrt)    
     mrt_div.appendChild(mrt)
 
     /* 換網頁頂端title! */

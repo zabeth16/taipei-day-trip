@@ -173,10 +173,7 @@ input{
     color: #666666;
 }
 
-.payment{
-    width: 980px;
-    height: 227px;    
-}
+
 
 .confirm{
     width: 980px;
@@ -210,6 +207,7 @@ input{
     font-weight: 400;
     color: #FFFFFF;
     border: none;   
+    cursor: pointer;
 }
 
 .icon_delete{
@@ -234,6 +232,38 @@ input{
     color: #FFFFFF;
     margin-top: 45px;
 }
+
+
+.tpfield {
+    width: 200px;
+    height: 36px;
+    padding-left: 10px;
+    border-radius: 5px;   
+    color: #000000;
+    border: 1px solid #E8E8E8;
+    margin-left: 5px;   
+    
+}
+
+.payment{
+    width: 980px;
+    height: 227px;    
+}
+
+.payment-title{
+    font-family: 'Noto Sans TC';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    color: #666666;
+    display: flex;
+    line-height: 53px;
+    align-items: center;
+    
+
+}
+
+
 
 @media (max-width:1200px) {
     .section{

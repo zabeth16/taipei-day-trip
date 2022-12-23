@@ -12,7 +12,7 @@ sign_btn.addEventListener("click" , () =>{
 
     if (sign_btn.innerHTML === "登出系統"){
         document.querySelector(".dialog-background").style.display ="none"
-        console.log("點擊登出")
+        // console.log("點擊登出")
         fetch(`/api/user/auth` , {
             method: "DELETE"
         })
@@ -20,7 +20,7 @@ sign_btn.addEventListener("click" , () =>{
             return response.json();
         })
         .then(function(data){
-            console.log("登出成功" , data)
+            // console.log("登出成功" , data)
             location.reload();
             // sign_btn.innerHTML === "登入/註冊"
 
@@ -82,7 +82,7 @@ signup.addEventListener("click" , (event) =>{
         "password" : password
     }
 
-    console.log(request_entry)
+    // console.log(request_entry)
 
     fetch(`/api/user` , {
         method:"POST",
@@ -136,7 +136,7 @@ login.addEventListener( "click" , (event) =>{
         "password" : password
     }
 
-    console.log(request_entry)
+    // console.log(request_entry)
     fetch(`/api/user/auth` , {
         method:"PUT",
         credentials:"include",
@@ -186,14 +186,14 @@ window.addEventListener('load', function() {
 
         if (data.data !== null) {
             // 如果存在 token，我的按鈕要改成登出系統
-            console.log("我的cookie 解密token" , data)
+            // console.log("我的cookie 解密token" , data)
             let button = document.querySelector("#login_signup")
             button.innerHTML = "登出系統"
 
 
         }else{
             // 如果不存在 token，就沒幹嘛
-            console.log("Cookie token does not exist")
+            // console.log("Cookie token does not exist")
         }
  
 

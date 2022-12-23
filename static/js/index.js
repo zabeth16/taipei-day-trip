@@ -82,7 +82,7 @@ button_search = document.querySelector(".button_search")
 
 async function keyword_load(){
     keyword = document.querySelector(".input").value
-    console.log(keyword)
+    // console.log(keyword)
     
 
     isLoading = true ;
@@ -184,10 +184,7 @@ let append_view = (data_list) =>{
                 let pic_box = document.createElement("img");
                 pic_box.id = "img-control";
                 pic_box.src = first_pic;
-                square.appendChild(pic_box);
-        
-
-
+                square.appendChild(pic_box);     
 
                 // attraction name (title)
 
@@ -205,7 +202,6 @@ let append_view = (data_list) =>{
                 mrt_box.className = "mrt" ;               
                 mrt_box.appendChild(mrt);
                 
-
 
                 // attraction category (tag)
                 let category = document.createTextNode(data_list[i].category);
@@ -226,11 +222,7 @@ let append_view = (data_list) =>{
                 a.href = "/attraction/" + data_list[i].id;    
 
                 content.appendChild(a)
-                a.appendChild(square)
-
-
-
-               
+                a.appendChild(square)               
 
         };  //for end   
 
@@ -293,8 +285,6 @@ async function load_view(entries){
     
 };
     
-
-
 // console.log(window.innerHeight)
 view_h = window.innerHeight
 
@@ -307,10 +297,7 @@ let options = {
 
 const observer = new IntersectionObserver(load_view, options);
 // console.log(new IntersectionObserver(load_view , options ));
-
-
 const listEnd = document.querySelector(".footer");
-
 observer.observe(listEnd);
 
 
@@ -341,10 +328,8 @@ function show_tag(){
             search_card.appendChild(search_text);            
             
         };
-     
-                
+           
     });
-
     
 };
 
@@ -352,9 +337,7 @@ show_tag();
 
 //============================================================
 
-
 /*  user login & signup 各種按鈕轉換顯示區 */
-
 
 let sign_btn = document.querySelector("#login_signup")
 
@@ -417,8 +400,7 @@ signup.addEventListener("click" , (event) =>{
 
 
     event.preventDefault(); // 禁止表單預設的提交
-    // 使用 serializeArray 方法將表單資料轉換成 JSON 格式
-    
+    // 使用 serializeArray 方法將表單資料轉換成 JSON 格式    
 
     let name = document.querySelector("#name").value
     let email = document.querySelector("#email").value

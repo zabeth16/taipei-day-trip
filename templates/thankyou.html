@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block title %}感謝訂購旅程!{% endblock %}
+{% block link %}<link rel="stylesheet" type="text/css" href= "{{ url_for('static',filename='css/thankyou.css') }}">{% endblock link %}
+{% block main %}
+
+<div class="main">
+    <!-- <img src = "mysource/img/thankyou.png"> -->
+    <div class="content">
+        行程預定結果 :  <txt class = "result"></txt>
+        <br/>
+        <div class = "order">
+            
+            您的訂單編號如下 :
+            <br/>
+            <br/>
+            {{ order_number }}
+            <br/>
+            <br/>
+            請妥善保存此訂單編號，祝您旅途愉快，謝謝 !
+        </div>
+
+        <div class = "contact">
+            <div class = detail>
+                訂購聯絡人: 
+                <txt class = "name"></txt>
+            </div>
+
+            <div class = detail>
+                訂購聯絡信箱: 
+                <txt class = "email"></txt>
+            </div>           
+        
+            <div class = detail>
+                訂購聯絡電話:
+                <txt class = "phone"></txt> 
+            </div>           
+        </div>
+
+
+    </div>
+
+</div>
+
+
+
+
+{% endblock main %}
+
+{% block script %}
+<script type="text/javascript" src = "mysource/js/thankyou.js"></script>
+<script type="text/javascript" src = "mysource/js/base.js"></script>
+{% endblock script %}
