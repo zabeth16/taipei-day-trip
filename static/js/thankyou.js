@@ -43,3 +43,35 @@ window.addEventListener("load" , function(){
     })
 });
 
+//============================================================
+/* 預定行程區 */
+
+const booking = document.querySelector("#booking")
+
+
+booking.addEventListener("click" , () =>{
+
+    fetch(`/api/user/auth`,{
+        method : "GET"
+    })
+    .then(function(response){
+        return response.json();        
+    })
+    .then(function(data){
+        console.log(data)
+        
+        
+        if (data.data === null){
+            document.querySelector(".dialog-background").style.display = "flex"; 
+        }else{
+            window.location.href = "/booking"
+        }
+
+    })
+    .catch(function(error){
+        console.error(error);
+    });
+
+  
+});
+

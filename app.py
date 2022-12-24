@@ -289,6 +289,11 @@ def orders():
 		name = order["order"]["contact"]["name"]
 		email = order["order"]["contact"]["email"]
 		phone = order["order"]["contact"]["phone"]
+		# 訂購景點資訊
+		attractionId = order["order"]["trip"]["attraction"]["id"]
+		date = order["order"]["trip"]["date"]
+		time = order["order"]["trip"]["time"]
+		price = order["order"]["price"]
 		# 取得現在的日期和時間
 		now = datetime.datetime.now()
 		# 建立訂單編號
@@ -302,6 +307,12 @@ def orders():
 			,(order_number , "未付款" , id , name , email , phone))
 		con.commit()
 		print(mycursor.rowcount, "was inserted.")
+		mycursor.execute("INSERT INTO order_trip \
+			(order_number, member_id, attractionId, date , time, price)\
+			VALUES(%s,%s,%s, %s,%s,%s)"\
+			,(order_number, id, attractionId, date, time, price))
+		con.commit()
+		print(mycursor.rowcount, "order_trip was inserted.")
 
 		
 		tap_pay = 	{
@@ -384,19 +395,20 @@ def orderNumver(orderNumber):
 							(orderNumber ,))
 			orders = mycursor.fetchall()
 			
-			member_id = orders[0]["member_id"]			
-			mycursor.execute("SELECT * FROM reservation\
-							WHERE memberId = %s" , \
+			member_id = orders[0]["member_id"]
+			# 這邊改用新的order_trip，下面travel記得也要改
+			mycursor.execute("SELECT * FROM order_trip\
+							WHERE member_id = %s" , \
 								(member_id ,))
-			reservation = mycursor.fetchone()
-			attractionId = reservation["attractionId"]
+			order_trip = mycursor.fetchone()
+			attractionId = order_trip["attractionId"]
 			mycursor.execute(" SELECT * FROM travel WHERE  id = %s" , (attractionId , ))
 			data = mycursor.fetchall()
 			data[0]["images"] = data[0]["images"].split(" ")
 			
 			return jsonify({"data": {
 								"number": orderNumber,
-								"price": reservation["price"],
+								"price": order_trip["price"],
 								"trip": {
 									"attraction": {
 										"id": attractionId,
@@ -404,8 +416,8 @@ def orderNumver(orderNumber):
 										"address": data[0]["address"],
 										"image": data[0]["images"][0]
 									},
-									"date": reservation["date"],
-									"time": reservation["time"]
+									"date": order_trip["date"],
+									"time": order_trip["time"]
 								},
 								"contact": {
 									"name": orders[0]["contact_name"],
@@ -424,7 +436,7 @@ def orderNumver(orderNumber):
 	except:
 		# 失敗
 		return ({"error" : True ,
-					"message": "伺服器伍佰老師。"}), 500
+					"message": "伺服器伍佰老師覺得很冷。"}), 500
 
 
 	finally:
@@ -445,9 +457,18 @@ def thankyou():
 			decoded = jwt.decode(cookie_token, secret_key, algorithms = "HS256" )	
 			id =  decoded["data"]["id"]
 			mycursor.execute('SELECT order_number FROM orders WHERE \
-							member_id = %s' , (id ,))
-			orders = mycursor.fetchone()					
-			return render_template("thankyou.html" , order_number = orders["order_number"])
+							member_id = %s ORDER BY id DESC' , (id ,))
+			orders = mycursor.fetchall()
+			# print(orders)
+			
+			# 訂成功後把reservation的清空
+			mycursor.close()  # 關閉游標
+			mycursor = con.cursor()  # 重新建立游標
+			mycursor.execute("UPDATE reservation SET attractionId=NULL ,date=NULL ,time=NULL ,price=NULL  , memberId=NULL WHERE id = 1")
+			con.commit()
+			print(mycursor.rowcount , "was delete. After payment finish.")
+			
+			return render_template("thankyou.html" , order_number = orders[0]["order_number"]) 
 
 		else:
 			return redirect("/")
@@ -459,6 +480,7 @@ def thankyou():
 	finally:
 		# print("感謝")
 		con.close
+		# mycursor.close
 		
 
 	
