@@ -6,6 +6,10 @@ import jwt
 import re
 from pool import pool
 import requests , datetime
+# 環境變數
+import os
+from dotenv import load_dotenv
+load_dotenv()
 
 app = Flask(
     __name__ , 
@@ -84,12 +88,8 @@ def auth():
 		if  request.method == "GET" :
 			# GET 我 cookie 的 token
 			cookie_token = request.cookies.get("token")
-			# print(cookie_token)
-			# 解密驗證JWT
-
-			# 顯示驗證後的JWT內容
-			# print(decoded)
 			if(cookie_token) :
+				# 解密驗證JWT
 				decoded = jwt.decode(cookie_token, secret_key, algorithms = "HS256" )
 				return decoded
 			else:
@@ -142,7 +142,6 @@ def booking_trip():
 	try:
 		con = pool.get_connection()
 		mycursor = con.cursor(dictionary = True)
-
 		cookie_token = request.cookies.get("token")
 
 		if  request.method == "GET" :
@@ -160,7 +159,6 @@ def booking_trip():
 				reservation = mycursor.fetchone()	
 				# print(reservation) 
 				if reservation != None :			
-
 					id = reservation["attractionId"]
 					date = reservation["date"]
 					date_str = date.strftime("%Y-%m-%d")
@@ -168,7 +166,6 @@ def booking_trip():
 					# strftime函數將datetime.date對象轉換為字符串
 					time = reservation["time"]
 					price = reservation["price"]
-
 					mycursor.execute('SELECT name , address , images FROM travel \
 									WHERE id = %s' , ( id ,))
 					travel = mycursor.fetchone()
@@ -215,8 +212,7 @@ def booking_trip():
 				return ({
 						"error": True,
 						"message": "未登入系統，拒絕存取"
-						}) , 403
-			
+						}) , 403			
 			else:
 				# 把預定行程放資料庫，且用inner join放進需要的會員資訊		
 				# def post_booking():	
@@ -245,7 +241,6 @@ def booking_trip():
 	except:
 		return jsonify({	"error": True ,
 							"message": "伺服器伍佰老師表示上帝救救我"}) , 500
-
 	finally:
 		con.close()
 		mycursor.close()
@@ -313,19 +308,20 @@ def orders():
 			,(order_number, id, attractionId, date, time, price))
 		con.commit()
 		print(mycursor.rowcount, "order_trip was inserted.")
-
-		
+		# 串接 TapPay後端
+		partner_key = os.getenv("partner_key")
+		merchant_id = os.getenv("merchant_id")
+		x_api_key = os.getenv("x_api_key")
 		tap_pay = 	{
 			"prime": order["prime"],
-			"partner_key": "partner_H09MBYnAE0TEdrrvr6cjzGH8aeN5jXM8WMuc9OnEGu45AXNiEivj4ylb",
-			"merchant_id": "zabeth16_TAISHIN",
+			"partner_key": partner_key,
+			"merchant_id": merchant_id,
 			"details":"TapPay Test",
 			"amount": order["order"]["price"],
 			"cardholder": {
 				"phone_number": order["order"]["contact"]["phone"],
 				"name": order["order"]["contact"]["name"],
 				"email": order["order"]["contact"]["email"],
-
 			},
 			"remember": True
 		}
@@ -334,7 +330,7 @@ def orders():
 		url = "https://sandbox.tappaysdk.com/tpc/payment/pay-by-prime"
 		headers = {
 			"Content-Type": "application/json",
-			"x-api-key": "partner_H09MBYnAE0TEdrrvr6cjzGH8aeN5jXM8WMuc9OnEGu45AXNiEivj4ylb"
+			"x-api-key": x_api_key
 			}
 		response = requests.post(url, json=tap_pay , headers=headers)
 
@@ -437,8 +433,6 @@ def orderNumver(orderNumber):
 		# 失敗
 		return ({"error" : True ,
 					"message": "伺服器伍佰老師覺得很冷。"}), 500
-
-
 	finally:
 		con.close()
 		mycursor.close()
@@ -482,11 +476,6 @@ def thankyou():
 		con.close
 		# mycursor.close
 		
-
-	
-
-
-
 #==============================================
 
 @app.route("/api/attractions")
@@ -503,13 +492,11 @@ def attractions():
 			find_value = ( page*12 , 12 ) # 判讀 起始 + 12 頁資料
 			mycursor.execute(find , find_value)
 			search = mycursor.fetchall()
-			print(len(search))
-
+			# print(len(search))
 			for i in  range( len(search) )  :
 				search[i]["images"] = search[i]["images"].split(" ")
-
+			# 設置一個變數做數字，要維護修改時改這邊即可
 			data_len = 12
-
 			# page 4 , next page = null
 			if len(search) < data_len :
 				return jsonify( { 
@@ -530,18 +517,16 @@ def attractions():
 			mycursor.execute(find_key , find_key_value )
 			search_key = mycursor.fetchall()
 			# print(search_key)
-			print(len(search_key))
+			# print(len(search_key))
 			for i in  range( len(search_key) )  :
 				search_key[i]["images"] = search_key[i]["images"].split(" ")
-
+			# 設置一個變數做數字，要維護修改時改這邊即可
 			data_len = 12
-
 			# next page = null
 			if len(search_key) < data_len :
 				return jsonify( { 
 					"nextPage": None ,
-					"data":	search_key					
-					
+					"data":	search_key						
 					} )
 			else:
 				return jsonify( { 
@@ -549,7 +534,6 @@ def attractions():
 						"data":	search_key					
 						} )
 	except:
-
 		print("夏夜晚風裡的伺服器伍佰老師愛你一萬年")
 		return jsonify(	{
 							"error": True,
@@ -562,7 +546,6 @@ def attractions():
 
 @app.route("/api/categories")
 def categories():
-	
 	try:
 		con = pool.get_connection()
 		mycursor = con.cursor(dictionary = True)
@@ -578,7 +561,6 @@ def categories():
 		return jsonify( { 
 			"data" :  list_CAT
 			} )
-
 	except:
 		print("伺服器伍佰老師迷路到挪威的森林裡")
 		return jsonify(	{
@@ -595,11 +577,9 @@ def attractionId(attractionId):
 	try:
 		con = pool.get_connection()
 		mycursor = con.cursor(dictionary = True)
-
 		mycursor.execute(" SELECT * FROM travel WHERE  id = %s" , (attractionId , ))
 		data = mycursor.fetchall()
 		# print(data[0]["images"])
-
 		data[0]["images"] = data[0]["images"].split(" ")		
 		return jsonify({
 					"data" : data
@@ -618,7 +598,6 @@ def attractionId(attractionId):
 				"error": True,
 				"message": "伺服器伍佰老師口袋就只有五百，啊~少年啊! 要忍耐，撐過熬過總算苦盡甘來"
 				}), 500
-
 	finally:
 		con.close()
 		mycursor.close()
@@ -629,21 +608,11 @@ def attractionId(attractionId):
 def attraction(id):
 	return	render_template("attraction.html")
 
-
-
-
-
-
-
 # ============================================
 
-
-# 建立一個密鑰，內容可以隨便打，session 用
-app.secret_key = "anyway, that is a secrect"
-
 # 給JWT用的密鑰
-secret_key = "the key for JWT "
-
+jwt_secret_key=os.getenv("jwt_secret_key")
+secret_key = jwt_secret_key
 
 # ============================================
 

@@ -6,7 +6,6 @@
     <title>景點頁面</title>
     <link rel="stylesheet" type="text/css" href= "{{ url_for('static',filename='css/attraction.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/user.css') }}">
-
 </head>
     
 <style>
@@ -44,9 +43,7 @@
                 <!-- 預留插入警告<txt> -->
                 <txt class = notice></txt>                
                 <button class = "switch-login">已經有帳戶了?點此登入</button>
-            </div>        
-            
-
+            </div>    
         </div>
 
         <div class = "dialog-login"  >
@@ -63,7 +60,6 @@
                 <txt class = notice-login></txt>
                 <button class = "switch-signup">還沒有帳戶?點此註冊</button>
             </div>
-
         </div>
     </div> <!-- dialog-background -->
 
@@ -72,18 +68,14 @@
             <div class = "slideshow-container">
                 <!-- <div class = "mySlides fade"> -->
                 <!-- <img class = "img-control" src="/mysource/G.jpg"/> -->
-                <!-- </div> -->
-                <img class = "left-A" src="/mysource/left-A.png" />
-                <img class = "right-A" src="/mysource/right-A.png"/>
-                <div class = "circle-box"></div>              
-
-
+                <!-- </div> -->             
             </div>
-
+            <img class = "left-A" src="/mysource/img/left-A.png" />
+            <img class = "right-A" src="/mysource/img/right-A.png"/>
+            <div class = "circle-box"></div>
 
             <div class="profile">
                 <txt class = "name"></txt>
-
                 <div class="detail">
                     <txt class="detail_text" id = "tag"></txt><!--塞tag-->
                     <txt class="detail_text">at</txt> <!--固定-->
@@ -92,21 +84,15 @@
 
                 <div class = "booking_area">
                     <txt class = "booking-title">訂購導覽行程</txt>
-                    <!-- <br />
-                    <br /> -->
                     <p class = "booking-intro">以此景點為中心的一日行程，帶您探索城市角落故事</p>
                     <div class = "booking-date">
                         <txt class = "booking-choose">訂購日期 :</txt>
-                        <input type = "date" class = "calender"></input>
-                        
+                        <input type = "date" class = "calender"></input>                        
                     </div>
-                    <txt class = "date-notice" style="display: none;"></txt>
-                    
+                    <txt class = "date-notice" style="display: none;"></txt>                    
                     <div class = "booking-time">
-
                         <txt class = "booking-choose">選擇時間 :</txt>
                         <div class = "day-time">
-
                             <div class = "big-circle" id = "big-day">
                                 <div class = "small-circle" id = "day"></div>
                             </div>
@@ -115,27 +101,17 @@
                                 <div class = "small-circle" id = "night"></div>
                             </div>
                             <txt class="what-time" >下半天</txt>
-
                         </div>
-
                     </div>
 
                     <div class = "booking-fee">
                         <txt class = "booking-choose">導覽費用 :</txt>
-                        <div class = "fee">新台幣2000元</div> <!--寫事件做改變費用textContent-->
-
+                        <div class = "fee">新台幣2000元</div>
                     </div>
-
                     <button class = "booking-btn">開始預約行程</button>
-                  
-
                 </div><!--booking_area end-->
-
-
             </div><!--profile end -->      
-     
-
-        </div>
+        </div><!--section end-->
     </div><!--welcome end-->
 
     <hr/>
@@ -145,24 +121,12 @@
             <div class = "info"></div>
             <txt class = "booking-choose">景點地址 :</txt>
             <div class = "address"></div>
-
             <txt class = "booking-choose">交通方式 :</txt>
             <div class = "traffic"></div>
-
-
-
         </div>
-
     </div>
 
-
-
-
-
-
-
     <div class = "footer">
-         
     </div>
 
 </body>

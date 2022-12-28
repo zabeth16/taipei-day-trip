@@ -5,8 +5,6 @@
     <meta meta name="viewport" content="width=device-width, initial-scale=1">
     <title>台北一日遊</title>
     <link rel="stylesheet" type="text/css" href= "{{ url_for('static',filename='css/index.css') }}">
-
-
 </head>
 
 <style>
@@ -20,8 +18,7 @@
             <txt class = "nav_title" href = "/">
                 台北一日遊
             </txt>
-            </a>
-            
+            </a>           
 
             <div class="top_buttum">
                 <button class = "forNavigation" id = "booking" >預定行程</button><!-- link will be right in <a> -->                                   
@@ -45,10 +42,8 @@
                 <!-- 預留插入警告<txt> -->
                 <txt class = notice></txt>                
                 <button class = "switch-login">已經有帳戶了?點此登入</button>
-            </div>        
-            
-
-        </div>
+            </div>      
+        </div><!--dialog-signup end-->
 
         <div class = "dialog-login"  >
             <div class = "decorator-bar"></div>
@@ -69,10 +64,7 @@
     </div> <!-- dialog-background -->
 
     
-
-
     <div class = "welcome" >
-
         <!-- <div id = "TP101" src="/mysource/welcomeTP101.jpg"></div> -->
         <!-- <img id = "TP101" width="100%" src="/mysource/welcomeTP101.jpg" /> -->
             <div class="slogan">
@@ -82,39 +74,23 @@
                     <br/>
                     <br/>
                 </div>                
-                <span class = "slogan_2">探索每個角落，體驗城市的深度旅遊行程</span>
-                
-                
+                <span class = "slogan_2">探索每個角落，體驗城市的深度旅遊行程</span>                
                 <div class = "search_bar">
-                    <input id = "input" class = "input" type = "search" placeholder="輸入景點名稱查詢" name = "search"  required /> <!--onclick ="show_tag();"-->
-                    
-                    <button class = "button_search"  type="submit"> <!--onclick = "keyword_view();"-->
-                        <img src="/mysource/icon-search.png"/>
+                    <input id = "input" class = "input" type = "search" placeholder="輸入景點名稱查詢" name = "search"  required /> 
+                    <button class = "button_search"  type="submit">
+                        <img src="/mysource/img/icon-search.png"/>
                     </button>
                     <div class = "locate_card">
                         <!-- <div class = "search_card" >
-                            <button class = "search_text">測試四字</button> 改div試試
+                            <button class = "search_text">測試四字</button> 改div
                             <button class = "search_text">測試四字</button>
-                        </div> -->
-                
-                    </div>
-    
-                </div>
-                
-
-
-
-
+                        </div> -->                
+                    </div>    
+                </div>             
             </div>
-
-
-        
     </div>
 
-
-
     <div class = "main">
-
              <!-- ATTN the radius every contents have -->
         <div class = "content-1">
             <!-- <div class = "square">
@@ -125,21 +101,12 @@
                     <div class = "tag"></div>
                 </div>
             </div> -->
-
         </div>
-
     </div>
-
     <!-- main js -->
     
-    
-
-
-    <div class = "footer">
-        <!-- <img class = "footer-pic" src="mysource/footer.jpg"/> -->
+    <div class = "footer">      
     </div>
-
-
 </body>
 
 <script type="text/javascript" src="mysource/js/index.js"></script>

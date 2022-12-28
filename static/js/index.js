@@ -30,10 +30,8 @@ input = document.querySelector(".input")
 
 input.addEventListener("click",function (Event)  {
     document.querySelector(".locate_card").style.display = "block";
-    console.log("召喚!!覆蓋的搜尋卡!");
-    
-    Event.stopPropagation(input)    
-  
+    // console.log("召喚!!覆蓋的搜尋卡!");    
+    Event.stopPropagation(input)      
     },false
 
 );
@@ -95,7 +93,7 @@ async function keyword_load(){
 
     
     if (data_list.length === 0){
-        console.log("沒有這個景點")
+        // console.log("沒有這個景點")
         main = document.querySelector(".content-1")
         warn = document.createTextNode("沒有這個景點")
         warn_box = document.createElement("div")
@@ -229,7 +227,7 @@ let append_view = (data_list) =>{
         
         
         if (nextPage !== null ){ 
-            console.log("繼續召喚");
+            // console.log("繼續召喚");
             isLoading = false ;
             // console.log(isLoading);
        
@@ -237,14 +235,11 @@ let append_view = (data_list) =>{
             isLoading = false ;
             // console.log(isLoading);
             // console.log("取消觀察，以免又觸發下一個 request");
-            // 不要做 unobserve或disconnect ，這樣會造成停滯            
-
-            
+            // 不要做 unobserve或disconnect ，這樣會造成停滯          
         } ;
     
 
 }; // append_view end
-
 
 
 /*====================*/
@@ -259,7 +254,8 @@ async function load_view(entries){
     entries.forEach((entry) => {
         if(entry.isIntersecting){
             if (nextPage === null || isLoading === true){
-                return console.log("不要動!");
+                return 
+                // console.log("不要動!");
             }
         
             if (keyword !== ""){ 
@@ -354,7 +350,7 @@ sign_btn.addEventListener("click" , () =>{
             return response.json();
         })
         .then(function(data){
-            console.log("登出成功" , data)
+            // console.log("登出成功" , data)
             location.reload();         
         })
 
@@ -531,7 +527,7 @@ booking.addEventListener("click" , () =>{
         return response.json();        
     })
     .then(function(data){
-        console.log(data)
+        // console.log(data)
         
         
         if (data.data === null){

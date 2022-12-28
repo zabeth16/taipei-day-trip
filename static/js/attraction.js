@@ -1,13 +1,6 @@
 /*  全域變數區  */
-
 let number = location.href.split("/")[4]
-
 typeof(number) // string
-// console.log(number)
-
-
-
-
 // ===========================================
 /*  普通用網址列載入 */
 
@@ -20,29 +13,14 @@ async function web_load() {
     
 }
 
-
 // let addEvent to call this function
 window.onload = web_load() ;
-// ============== ATTN ===============
-
-
 
 // ===========================================
 
 /*  放入資料  */
 
 function append_view(data){
-    // console.log(data[0])
-
-    //  name = data[0].name
-    //  tag = data[0].category
-    //  mrt = data[0].mrt
-    //  imgs = data[0].imgs
-
-    //  description = data[0].description
-    //  address = data[0].address
-    //  transport = data[0].transport  
-
     let info = document.querySelector(".info")    
     let description = document.createTextNode(data[0].description)
     info.appendChild(description)
@@ -69,52 +47,34 @@ function append_view(data){
     }
     let mrt = document.createTextNode(data[0].mrt)    
     mrt_div.appendChild(mrt)
-
-    /* 換網頁頂端title! */
-    
+    /* 換網頁頂端title! */    
     document.title = "景點: " + (data[0].name);
-    
-    
-
     //////////////////////////////
 
     /*  先弄 mySlides fade 包住我圖片  */
 
     let slide_container = document.querySelector(".slideshow-container")
-
     for (i = 0 ; i < data[0].images.length ; i++){
         let mySlides = document.createElement("div")
         mySlides.className = "mySlides" + " fade"
         let imgs = document.createElement("img")
-        imgs.className = "img-control"
-        // ======ATTN temp for the first one ===========
+        imgs.className = "img-control"        
         imgs.src = data[0].images[i]  
         // all imgs will not show well
         mySlides.appendChild(imgs)
         slide_container.appendChild(mySlides)
     }
-
-   
-
-
-
     // the circle and its' box 
     let circle_box = document.querySelector(".circle-box")
     
     for (i = 1 ; i < data[0].images.length  + 1; i ++){
         let dot = document.createElement("div")
         dot.className = "dot"
-        let current_len = data[0].images.length
-    
+        let current_len = data[0].images.length    
         dot.setAttribute("onclick" , "currentSlide(" + i + ")")
         circle_box.appendChild(dot)
     
-    }
-   
-    // 我每個景點有幾張圖?
-    // console.log(data[0].images.length)
-
-    
+    }    
     showSlides(slideIndex);
 
 }; //append_view()  end
@@ -123,9 +83,7 @@ function append_view(data){
 
 let right_A = document.querySelector(".right-A")
 let left_A = document.querySelector(".left-A")
-
 right_A.setAttribute("onclick" , "plusSlides(1)")
-
 left_A.setAttribute("onclick" , "plusSlides(-1)")
 
 
@@ -252,22 +210,15 @@ bookingBtn.addEventListener("click" , () =>{
             // 未登入要彈給他登入
             document.querySelector(".dialog-background").style.display = "flex";
 
-        }
-
-
-        
+        }        
     });
-
 });
 
 //============================================================
 /* 預定行程區 */
 
 const booking = document.querySelector("#booking")
-
-
 booking.addEventListener("click" , () =>{
-
     fetch(`/api/user/auth`,{
         method : "GET"
     })
@@ -275,19 +226,13 @@ booking.addEventListener("click" , () =>{
         return response.json();        
     })
     .then(function(data){
-        console.log(data)
-        
-        
         if (data.data === null){
             document.querySelector(".dialog-background").style.display = "flex"; 
         }else{
             window.location.href = "/booking"
         }
-
     })
     .catch(function(error){
         console.error(error);
-    });
-
-  
+    });  
 });
