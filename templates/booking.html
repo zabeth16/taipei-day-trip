@@ -1,3 +1,4 @@
+
 {% extends "base.html" %}
 
 {% block title %}我的預定行程{% endblock %}
@@ -38,16 +39,16 @@
         <div class = "contact-title">聯絡人資訊</div>
         <div class = "input-title">
             聯絡姓名 : 
-            <input type="text" class="name"/>
+            <input type="text" class="name" required/>
             <br>
             聯絡信箱 :
-            <input type="email" class="email"/> <!-- 記得用正則表達式 -->
+            <input type="email" class="email" placeholder="XXX@XXX.com" required/> <!-- 記得用正則表達式 -->
             <br>
             手機號碼 :
-            <input type="tel" class="phone"/>
+            <input type="tel" class="phone" required/> <!-- 記得用正則表達式 -->
             <br>
             <div class = "phone-notice">請保持手機暢通，準時到達，導覽人員將用手機與您聯繫，務必留下正確的聯絡方式。</div>
-
+            <div class = "contact-notice"></div>
         </div>
 
     </div><!--contact end-->
@@ -55,16 +56,21 @@
     <hr class = "hr-payment"/>
     <div class = "payment">
         <div class = "contact-title">信用卡付款資訊</div>
-        <div class = "input-title">
+        <div class = "payment-title">
             卡片號碼 :
-            <input type="password" class="card-number"/> <!-- 要注意每4個 * 間格-->
-            <br>
-            過期時間 :
-            <input type="month" class="card-number"/>
-            <br>
-            驗證密碼 :
-            <input type="password" class="card-number"/> <!-- 要注意長度限制只有3個-->
+            <div  class="tpfield"  id="card-number" ></div> 
         </div>
+        <div class = "payment-title">
+            過期時間 :
+            <div  class="tpfield" id="card-expiration-date"></div>
+        </div>
+        <div class = "payment-title">
+            驗證密碼 :
+            <div  class="tpfield" id="card-ccv"></div> 
+        </div>     
+            
+            
+        
     </div>
 
     <hr/>
@@ -72,7 +78,7 @@
     <div class = "confirm">
         <div class = "confirm-fee">總價 : </div>
         
-        <button class = "confirm-button" type = "button">確認訂購並付款</button>
+        <button class = "confirm-button" type = "submit" >確認訂購並付款</button>
 
     </div>
 
@@ -88,6 +94,13 @@
 <!-- remember to recover the footer-->
 
 {% block script %}
-<script type="text/javascript" src ="mysource/js/booking.js"></script>
+<script src="https://js.tappaysdk.com/sdk/tpdirect/v5.14.0"></script>
+<script>
+    TPDirect.setupSDK(126899, 'app_wIhJILCoyvCXsxeNyaUvzsthBDxAYZT3nkigjzigMoK1SFiJCKSPQVmIeQIX', 'sandbox')      
+</script>
+<script type="text/javascript" src = "mysource/js/booking.js"></script>
 <script type="text/javascript" src = "mysource/js/base.js"></script>
+
 {% endblock script %}
+
+

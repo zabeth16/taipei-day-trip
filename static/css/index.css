@@ -6,19 +6,16 @@ body{
 }
 
 
-
 .nav{
     /*固定頂端*/
     background-color: #ffffff;
-    display: flex;
-    
+    display: flex; 
     align-items: center;
     top:0;
     justify-content: center;
     position: fixed;
     width: 100%;
     z-index: 1; /*第一層*/
-    
 } 
 
 
@@ -68,36 +65,20 @@ body{
     border:none;
     background-color: #FFFFFF;
     cursor:pointer;
-    /* height: 34px; */
 }
 
 .welcome{
-
     display: flex;
     justify-content: center;
     align-items: center;
     width: 100%;
     margin-top: 54px;
     height: 320px;
-    background-image:  url("/mysource/css/welcomeTP101.jpg");
+    background-image:  url("/mysource/img/welcomeTP101.jpg");
     background-repeat: no-repeat;
     background-position:top center;
     background-size: cover;
-
-    
 }
-
-/* #TP101{ */
-
-    /* height: 320px; */
-    /* width: 100%;
-    margin-top: 54px; */
-
-    /* justify-content: center;
-    align-items: center; */
-    /* overflow:hidden;  */
-
-
 
 .slogan{
     position:absolute;    
@@ -112,17 +93,15 @@ body{
     font-style: normal;
     font-weight: 700;
     font-size: 28px;
-    /*我行距設 15px，所以再一個段行就可以有相距 15px 的間格*/
+    /*我行距設 15px，所以再一個斷行就可以有相距 15px 的間格*/
     line-height: 15px;
 }
 
 .slogan_2{
-    
     font-family: 'Noto Sans TC';
     font-style: normal;
     font-weight: 700;
     font-size: 16px;
-    /* line-height: 15px; */
 }
 
 .search_bar{
@@ -137,7 +116,6 @@ body{
     display: flex;
     flex-wrap: wrap;
     display: none;
-    
 }
 
 
@@ -147,13 +125,11 @@ body{
     box-shadow: 0px 0px 20px #AABBCC;
     width: 400px;
     height:auto;
-    margin-top: 5px;
+    margin-top: 15px;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
     border-radius: 5px;
-    /* display: none; */
-
 }
 
 .search_text{
@@ -175,12 +151,69 @@ body{
     cursor: pointer;
 }
 
+
+.input{
+    background-color: #ffffff;
+    width: 400px;
+    font-family: 'Noto Sans TC';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 16px;
+    padding: 15px;
+    border:0;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+.button_search{
+    background-color: #448899;
+    width: 60px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    cursor:pointer;
+    border:0;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+.main{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.content-1{
+    margin-top: 54px;
+    display:flex;
+    width: 1200px;
+    height: auto;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between ;
+
+}
+
+.square{
+    display: inline-grid;
+    height: 242px;
+    width: 270px;
+    border-style:solid;
+    border-color: #c4c4c4;
+    border-width: 1.5px;
+    border-radius: 5px ;
+    margin-bottom: 30px ;
+    transition: transform 0.2s;  /* 設置轉換效果的持續時間 */
+    
+}
+
+
 .square:hover{
     background-color: #E8E8E8;
     cursor: pointer;
-    -webkit-filter: grayscale(50%);
-    filter: grayscale(50%);
     /* animation: shake 0.5s; */
+    transform: scale(1.1); 
 }
 
 
@@ -199,98 +232,8 @@ body{
     100% { transform: translate(1px, -2px) rotate(-1deg); }
 }
 
-#img-control:hover{
-    -webkit-filter: grayscale(80%);
-    filter: grayscale(80%);
-    /* animation: shake 0.5s; */
-    /* animation-iteration-count: infinite; */
-
-    -webkit-filter: blur(1px); /* Safari 6.0 - 9.0 */
-    filter: blur(1px);
-}
-
-.input{
-
-    background-color: #ffffff;
-    width: 400px;
-    font-family: 'Noto Sans TC';
-    font-style: normal;
-    font-weight: 700;
-    font-size: 16px;
-    line-height: 16px;
-    padding: 15px;
-    border:0;
-    
-    
-    border-top-left-radius: 5px;
-    border-bottom-left-radius: 5px;
-
-}
-
-.button_search{
-    background-color: #448899;
-    width: 60px;
-    justify-content: center;
-    align-items: center;
-    display: flex;
-    cursor:pointer;
-    border:0;
-    border-top-right-radius: 5px;
-    border-bottom-right-radius: 5px;
-
-
-}
-
-
-
-
-.main{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-/* .content{
-    margin-top: 54px;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr;
-    grid-gap: 30px;
-
-    width: 1200px;
-    height:816px;
-    background-color: #ffffff;
-} */
-
-/**/
-.content-1{
-    margin-top: 54px;
-    display:flex;
-    width: 1200px;
-    height: auto;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-between ;
-    /* margin: 30px; */
-}
-
-.square{
-    display: inline-grid;
-    height: 242px;
-    width: 270px;
-    border-style:solid;
-    border-color: #c4c4c4;
-    border-width: 1.5px;
-    border-radius: 5px ;
-    margin-bottom: 30px ;
-    
-    
-}
-
-
 
 .title{
-    
     grid-column-start: 1;
     grid-column-end:2;    
     font-size: 16px;
@@ -298,16 +241,13 @@ body{
     font-style: normal;
     font-weight: 700;
     background: rgb(0, 0, 0 , 0.6);
+    /* 使用RGB特性來調整透明度，就不會影響子層 */
     color: #FFFFFF;
-    /* opacity: 0.6; */
     line-height: 40px;
     padding-left: 10px;
-    overflow: hidden;
-        
+    overflow: hidden;        
     position: relative; 
-    height:40px;   
-
-    
+    height:40px;      
 
 }
 
@@ -319,14 +259,12 @@ body{
     border-top-right-radius: 4px;
     border-top-left-radius: 4px;
     aspect-ratio: 1;
-
 }
 
 .attractionLink{  
     /* 用a 包住square 就好了啊!!!! */
     height: 242px;
     width: 270px; 
-    /* z-index: 1; */
     margin-bottom: 30px;
     text-decoration: none;
 } 
@@ -337,61 +275,41 @@ body{
     /* 還可以簡寫為 grid-area: 1 / 2 */
     grid-area: 1/ 1 / 2;
     align-self: end;   
-
 } 
-
-
 
 .detail{
     display: flex;
     align-items: center;
     justify-content: space-between ;
-    height: 45px;
-    
-    
+    height: 45px;   
 }
 
 .mrt{
-       
     color: #757575;
     font-family: 'Noto Sans TC';
     font-style: normal;
     font-weight: 500;
     font-size: 16px;
-    margin-left: 10px;
-    
+    margin-left: 10px;    
 }
 
-.tag{
-
-    
-    
+.tag{   
     color: #757575;
     font-family: 'Noto Sans TC';
     font-style: normal;
     font-weight: 500;
     font-size: 16px;
     margin-right: 10px;
-    
-
-
 }
-
-
-/* .footer-pic{
-    width: 100%;
-} */
 
 .footer{
     height: 10vh;
-    background-image: url("/mysource/css/footer.jpg");
+    background-image: url("/mysource/img/footer.jpg");
     background-position:top center;
     background-size: cover;
-
 }
 
-.warn_box{
-    
+.warn_box{    
     font-family: 'Noto Sans TC';
     font-style: normal;
     font-weight: 700;
@@ -399,8 +317,7 @@ body{
     color: #2d3d45;   
     font-size: 50px; 
     width: 1200px;
-    padding-bottom: 54px;
-    
+    padding-bottom: 54px;    
 }
 
 
@@ -419,7 +336,7 @@ body{
 .dialog-signup{
     background-color: #FFFFFF;   
     width: 340px;
-    height: 380px;
+    height: 360px;
     border-radius: 6px;
     margin-top: 80px;
     overflow: hidden;
@@ -456,12 +373,11 @@ body{
 }
 
 .dialog-main{
-    margin: 15px;
+    margin: 15px 15px 45px 15px;
     height: 292px;
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-
 }
 
 .dialog-title{
@@ -484,17 +400,13 @@ body{
     cursor: pointer;
     top:0;
     right: 0;
-
 }
 
-.icon_close_login{
-    
+.icon_close_login{    
     position: absolute;
     cursor: pointer;
     top:0;
-    right: 0;
-
-    
+    right: 0;   
 }
 
 .dialog-login{
@@ -593,17 +505,11 @@ body{
     .search_bar{
         width: 460px;
     }
-    /* .input{
-        width: 80%;
-    } */
-
 
     .slogan{
         flex-wrap: wrap;
         width: 90%;
-        height: auto;   
-  
-        
+        height: auto;    
     }
 
     .content-1{
@@ -614,13 +520,6 @@ body{
         width: 45%;
     }
 
-    /* .square{
-        width: 45%;
-    } */
-
-    
-
-
 }
 
 @media (max-width:600px){
@@ -628,7 +527,6 @@ body{
         font-size: 30px;
         padding-left: 10px;
     }
-
 
     .search_bar{
         width: 290px;
@@ -653,7 +551,6 @@ body{
 
     .input{
         width:230px;
-
     }
 
     .content-1{
@@ -668,7 +565,14 @@ body{
     .attractionLink{
         width: 100%;
         margin-top: 30px;
-    }
+    }    
+}
 
-    
+@media (max-width:360px){
+    .nav_title{
+        font-size: 20px;
+    }
+    .square{
+        height: 250px;
+    }
 }
