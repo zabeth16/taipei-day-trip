@@ -150,8 +150,7 @@ def booking_trip():
 				decoded = jwt.decode(cookie_token, secret_key, algorithms = "HS256" )
 				id =  decoded["data"]["id"]
 				mycursor.execute('SELECT id FROM member WHERE id = %s' , (id ,))
-				member_id = mycursor.fetchone()["id"]			
-
+				member_id = mycursor.fetchone()["id"]		
 				mycursor.execute(
 								'SELECT attractionId , date , time , price\
 								FROM reservation \
@@ -194,14 +193,12 @@ def booking_trip():
 							}) , 403
 
 		elif request.method == "POST" :
-
 			trip_reservation = request.get_json()
 			print(trip_reservation)
 			attractionId = trip_reservation["attractionId"]
 			date = trip_reservation["date"]
 			time = trip_reservation["time"]
 			price = trip_reservation["price"]
-
 			if (date == ""):
 				return ({
 							"error": True,
@@ -231,12 +228,26 @@ def booking_trip():
 				return  ({"ok" : True})
 
 		else: # DELETE method
-			# remember to revise comparing id with tokken id
-			mycursor.execute('UPDATE reservation SET attractionId=NULL ,date=NULL ,time=NULL ,price=NULL  , memberId=NULL \
-				WHERE id = 1 ')
-			con.commit()
-			print(mycursor.rowcount , "was delete.")
-			return ({"ok" : True })
+			# comparing user id with tokken id  
+			decoded = jwt.decode(cookie_token, secret_key, algorithms = "HS256" )
+			id =  decoded["data"]["id"]
+			mycursor.execute("SELECT * FROM reservation \
+				WHERE memberId = %s" , (id ,))
+			mycursor.fetchone()
+			find_who =  mycursor.rowcount
+			mycursor.close()  # 關閉游標			
+			if find_who > 0 :
+				mycursor = con.cursor()  # 重新建立游標	
+				mycursor.execute("UPDATE reservation SET  \
+					attractionId=NULL ,date=NULL ,time=NULL ,price=NULL  , memberId=NULL \
+					WHERE id = 1 ")
+				con.commit()
+				print(mycursor.rowcount , "was delete.")
+				return ({"ok" : True })
+			else:
+				# id was different with token id , someone is BAAAAD.
+				return
+
 
 	except:
 		return jsonify({	"error": True ,
