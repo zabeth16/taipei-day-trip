@@ -89,7 +89,9 @@ function append_view(data){
         if (x > 50) {
             currentIndex = (currentIndex + 1) % data[0].images.length;
             imageElement.src = data[0].images[currentIndex];
-        }       
+            // 將圖片元素的顯示狀態設置為「顯示」
+            imageElement.style.display = "block";
+        }      
     })
 
 
