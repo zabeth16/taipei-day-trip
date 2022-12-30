@@ -84,14 +84,6 @@ function append_view(data){
     let currentIndex = 0;
     imageElement.addEventListener("touchmove", function(event) {
         for (i = 1 ; i < data[0].images.length  + 1; i ++){
-            let mySlides = document.createElement("div")
-            mySlides.className = "mySlides" + " fade"
-            let imgs = document.createElement("img")
-            imgs.className = "img-control"        
-            imgs.src = data[0].images[i]  
-            // all imgs will not show well
-            mySlides.appendChild(imgs)
-            slide_container.appendChild(mySlides)
             // 取得觸摸的水平位移量
             let x = event.touches[0].clientX;
             // 如果觸摸的水平位移量大於 50，則更換下一張圖片
@@ -99,9 +91,7 @@ function append_view(data){
                 currentIndex = (currentIndex + 1) % data[0].images.length;
                 imageElement.src = data[0].images[currentIndex];
             }
-        }
-        
- 
+        }     
         
     })
 
@@ -128,23 +118,23 @@ function plusSlides(n) {
 }
 
 function currentSlide(n) {
-showSlides(slideIndex = n);
+    showSlides(slideIndex = n);
 }
 
 function showSlides(n) {
-let i;
-let slides = document.getElementsByClassName("mySlides");
-let dots = document.getElementsByClassName("dot");
-if (n > slides.length) {slideIndex = 1}    
-if (n < 1) {slideIndex = slides.length}
-for (i = 0; i < slides.length; i++) {
-    slides[i].style.display = "none";  
-}
-for (i = 0; i < slides.length ; i++) {
-    dots[i].className = dots[i].className.replace(" active", "");
-}
-slides[slideIndex-1].style.display = "block";  
-dots[slideIndex-1].className += " active";
+    let i;
+    let slides = document.getElementsByClassName("mySlides");
+    let dots = document.getElementsByClassName("dot");
+    if (n > slides.length) {slideIndex = 1}    
+    if (n < 1) {slideIndex = slides.length}
+    for (i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";  
+    }
+    for (i = 0; i < slides.length ; i++) {
+        dots[i].className = dots[i].className.replace(" active", "");
+    }
+    slides[slideIndex-1].style.display = "block";  
+    dots[slideIndex-1].className += " active";
 }
 
 
