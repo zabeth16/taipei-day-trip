@@ -79,17 +79,30 @@ function append_view(data){
 
     /* 平板手機的觸摸滑動事件 */
     // 取得圖片元素
-    const imageElement = document.querySelector("img");
+    const imageElement = document.querySelector(".slideshow-container");
     // 定義目前顯示的圖片索引
     let currentIndex = 0;
     imageElement.addEventListener("touchmove", function(event) {
-        // 取得觸摸的水平位移量
-        let x = event.touches[0].clientX;
-        // 如果觸摸的水平位移量大於 50，則更換下一張圖片
-        if (x > 50) {
-            currentIndex = (currentIndex + 1) % data[0].images.length;
-            imageElement.src = data[0].images[currentIndex];
+        for (i = 1 ; i < data[0].images.length  + 1; i ++){
+            let mySlides = document.createElement("div")
+            mySlides.className = "mySlides" + " fade"
+            let imgs = document.createElement("img")
+            imgs.className = "img-control"        
+            imgs.src = data[0].images[i]  
+            // all imgs will not show well
+            mySlides.appendChild(imgs)
+            slide_container.appendChild(mySlides)
+            // 取得觸摸的水平位移量
+            let x = event.touches[0].clientX;
+            // 如果觸摸的水平位移量大於 50，則更換下一張圖片
+            if (x > 50) {
+                currentIndex = (currentIndex + 1) % data[0].images.length;
+                imageElement.src = data[0].images[currentIndex];
+            }
         }
+        
+ 
+        
     })
 
 
