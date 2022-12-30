@@ -88,11 +88,11 @@ imageElement.addEventListener("touchmove", function(event) {
     // 取得觸摸的水平位移量
     let x = event.touches[0].clientX;
     // 如果觸摸的水平位移量大於 50，則觸發 plusSlides(1) 函式
-    if (x > 50) {
+    if (x > 150) {
         plusSlides(1);
     }
     // 如果觸摸的水平位移量小於 -50，則觸發 plusSlides(-1) 函式
-    if (x < -50) {
+    if (x < -150) {
         plusSlides(-1);
     }
 })
