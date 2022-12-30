@@ -73,8 +73,7 @@ body{
 .section{
     display: flex;
     width: 1200px;
-    position:absolute;        
-    height: auto;      
+    position:absolute;            
     height: 400px;
 }
 
@@ -416,6 +415,10 @@ hr{
 
 .high-date-notice{
     height: 350px;
+}
+
+.hr-date-notice{
+    margin-top: 100px;
 }
 
 @media (max-width:660px){

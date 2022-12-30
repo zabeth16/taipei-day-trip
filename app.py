@@ -370,7 +370,8 @@ def orders():
 			# print(response.text)
 			return ({
 					"error": True,
-					"message": "付款未成功，訂單建立失敗，輸入不正確或其他原因。"
+					"message": "付款未成功，訂單建立失敗，輸入不正確或其他原因。",
+					"number": order_number
 					}) , 400
 
 		else:
@@ -445,8 +446,8 @@ def orderNumver(orderNumber):
 		return ({"error" : True ,
 					"message": "伺服器伍佰老師覺得很冷。"}), 500
 	finally:
-		con.close()
-		mycursor.close()
+		con.close
+		# mycursor.close()
 
 
 
