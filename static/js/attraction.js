@@ -77,27 +77,25 @@ function append_view(data){
     }    
     showSlides(slideIndex);
 
-    /* 平板手機的觸摸滑動事件 */
-    // 取得圖片元素
-    const imageElement = document.querySelector(".slideshow-container");
-    // 定義目前顯示的圖片索引
-    let currentIndex = 0;
-    imageElement.addEventListener("touchmove", function(event) {        
-        // 取得觸摸的水平位移量
-        let x = event.touches[0].clientX;
-        // 如果觸摸的水平位移量大於 50，則更換下一張圖片
-        if (x > 50) {
-            currentIndex = (currentIndex + 1) % data[0].images.length;
-            imageElement.src = data[0].images[currentIndex];
-            // 將圖片元素的顯示狀態設置為「顯示」
-            imageElement.style.display = "block";
-        }      
-    })
-
-
 }; //append_view()  end
-    
 
+/* 手機平板的左右滑動顯示圖片 */
+// 取得圖片元素
+const imageElement = document.querySelector(".slideshow-container");
+// 定義目前顯示的圖片索引
+let currentIndex = 0;
+imageElement.addEventListener("touchmove", function(event) {
+    // 取得觸摸的水平位移量
+    let x = event.touches[0].clientX;
+    // 如果觸摸的水平位移量大於 50，則觸發 plusSlides(1) 函式
+    if (x > 50) {
+        plusSlides(1);
+    }
+    // 如果觸摸的水平位移量小於 -50，則觸發 plusSlides(-1) 函式
+    if (x < -50) {
+        plusSlides(-1);
+    }
+})
 
 let right_A = document.querySelector(".right-A")
 let left_A = document.querySelector(".left-A")
