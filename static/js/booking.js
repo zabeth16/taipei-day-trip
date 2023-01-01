@@ -245,11 +245,11 @@ submitButton.addEventListener("click" , onSubmit = (event)  => {
         }).then(function(data){
             // console.log(data.data.payment.status)
             if (data.data.payment.status === 0){
-                console.log("付款成功 your order number" , data.data.number)
+                // console.log("付款成功 your order number" , data.data.number)
                 const orderNumber = data.data.number
                 window.location.href = `/thankyou?number=${orderNumber}`
             }else{
-                console.log("付款失敗 your order number" , data.data.number)
+                // console.log("付款失敗 your order number" , data.data.number)
                 // // fail to payment
                 const orderNumber = data.data.number
                 window.location.href = `/thankyou?number=${orderNumber}`               

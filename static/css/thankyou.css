@@ -10,9 +10,6 @@
 .content{
     width: 1200px;
     height: 500px;
-    /* display: flex;
-    justify-content: center;
-    flex-wrap: wrap; */
     font-family: 'Noto Sans TC';
     font-style: normal;
     font-weight: 700;
@@ -21,12 +18,13 @@
     text-align: center;
     background-image: url("/mysource/img/thankyou.png");
     background-repeat: no-repeat;
-    /* background-size: cover; */
 }
 
+.result-title{
+    margin-top: 20px;
+}
 .result{
-    width: 10%;
-  
+    width: 10%;  
 }
 
 .contact{
