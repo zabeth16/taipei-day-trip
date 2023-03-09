@@ -27,10 +27,8 @@
                 <txt class = "fee"></txt>
                 地點 :
                 <txt class = "address"></txt>                
-            </div>       
-
+            </div>      
         </div>
-
     </div><!-- section end-->
 
     <hr/>
@@ -68,39 +66,25 @@
             驗證密碼 :
             <div  class="tpfield" id="card-ccv"></div> 
         </div>     
-            
-            
-        
     </div>
 
     <hr/>
 
     <div class = "confirm">
-        <div class = "confirm-fee">總價 : </div>
-        
+        <div class = "confirm-fee">總價 : </div>        
         <button class = "confirm-button" type = "submit" >確認訂購並付款</button>
-
-    </div>
-
-
-
-    
+    </div>   
     
 </div>
 
 
 {% endblock main %}
 
-<!-- remember to recover the footer-->
-
 {% block script %}
 <script src="https://js.tappaysdk.com/sdk/tpdirect/v5.14.0"></script>
-<script>
-    TPDirect.setupSDK(126899, 'app_wIhJILCoyvCXsxeNyaUvzsthBDxAYZT3nkigjzigMoK1SFiJCKSPQVmIeQIX', 'sandbox')      
-</script>
+<script type="module" src= "mysource/js/TapPay.js"></script>
 <script type="text/javascript" src = "mysource/js/booking.js"></script>
 <script type="text/javascript" src = "mysource/js/base.js"></script>
-
 {% endblock script %}
 
 

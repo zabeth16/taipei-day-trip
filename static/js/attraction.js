@@ -78,8 +78,24 @@ function append_view(data){
     showSlides(slideIndex);
 
 }; //append_view()  end
-    
 
+/* 手機平板的左右滑動顯示圖片 */
+// 取得圖片元素
+const imageElement = document.querySelector(".slideshow-container");
+// 定義目前顯示的圖片索引
+let currentIndex = 0;
+imageElement.addEventListener("touchmove", function(event) {
+    // 取得觸摸的水平位移量
+    let x = event.touches[0].clientX;
+    // 如果觸摸的水平位移量大於 50，則觸發 plusSlides(1) 函式
+    if (x > 270) {
+        plusSlides(1);
+    }
+    // 如果觸摸的水平位移量小於 -50，則觸發 plusSlides(-1) 函式
+    if (x < -270) {
+        plusSlides(-1);
+    }
+})
 
 let right_A = document.querySelector(".right-A")
 let left_A = document.querySelector(".left-A")
@@ -99,28 +115,27 @@ function plusSlides(n) {
 }
 
 function currentSlide(n) {
-showSlides(slideIndex = n);
+    showSlides(slideIndex = n);
 }
 
 function showSlides(n) {
-let i;
-let slides = document.getElementsByClassName("mySlides");
-let dots = document.getElementsByClassName("dot");
-if (n > slides.length) {slideIndex = 1}    
-if (n < 1) {slideIndex = slides.length}
-for (i = 0; i < slides.length; i++) {
-    slides[i].style.display = "none";  
-}
-for (i = 0; i < slides.length ; i++) {
-    dots[i].className = dots[i].className.replace(" active", "");
-}
-slides[slideIndex-1].style.display = "block";  
-dots[slideIndex-1].className += " active";
+    let i;
+    let slides = document.getElementsByClassName("mySlides");
+    let dots = document.getElementsByClassName("dot");
+    if (n > slides.length) {slideIndex = 1}    
+    if (n < 1) {slideIndex = slides.length}
+    for (i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";  
+    }
+    for (i = 0; i < slides.length ; i++) {
+        dots[i].className = dots[i].className.replace(" active", "");
+    }
+    slides[slideIndex-1].style.display = "block";  
+    dots[slideIndex-1].className += " active";
 }
 
 
 // ===========================================
-
 
 // ===========================================
 
@@ -157,10 +172,20 @@ const bookingBtn = document.querySelector(".booking-btn")
 bookingBtn.addEventListener("click" , () =>{
     let id = number
     let date = document.querySelector(".calender").value
-
-    // document.getElementById('.calender').value = new 
-    // Date().toISOString().substr(0, 10)
-        
+    //設定今天的日期
+    var today = new Date();
+    document.querySelector(".calender").min = today.toISOString().split("T")[0];
+    let selectedDate = new Date(date);
+    if (selectedDate.getTime() < today.getTime()) {
+        const dateNotice = document.querySelector(".date-notice")
+        dateNotice.style.display = "block"
+        dateNotice.textContent = "請選擇今天或之後的日期！"
+        const bookingArea = document.querySelector(".booking_area")
+        bookingArea.classList.add("high-date-notice")
+        const hr = document.querySelector("hr")
+        hr.classList.add("hr-date-notice")
+        return
+    }     
     // time 用錢弄出來
     let fee = document.querySelector(".fee").textContent
     let feeWord = fee.split("新台幣")   
@@ -200,7 +225,7 @@ bookingBtn.addEventListener("click" , () =>{
             window.location.href = "/booking";
         }
         else if (data.message === "日期不可為空" ){
-            console.log(data.message);
+            // console.log(data.message);
             const dateNotice = document.querySelector(".date-notice")
             dateNotice.style.display = "block"
             dateNotice.textContent = data.message

@@ -9,7 +9,7 @@ window.addEventListener("load" , function(){
     .then(function(response) {
         if(response.status === 500) {
             const result = document.querySelector(".result")
-            result.textContent = "這是您上一筆歷史訂單"
+            result.textContent = "失敗，請保存此訂單號做詢問"
             const detail = document.querySelectorAll(".detail")
             for (let item of detail) {
                 item.textContent = '';
@@ -31,7 +31,8 @@ window.addEventListener("load" , function(){
         }else{
             const result = document.querySelector(".result")
             result.textContent = "失敗 ~"
-
+            const resultNotice = document.querySelector(".result-notice")
+            resultNotice.textContent = data.message
             const name = document.querySelector(".name")
             name.textContent = data.data.contact.name
             const email = document.querySelector(".email")
