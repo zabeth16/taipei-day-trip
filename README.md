@@ -4,8 +4,8 @@ taipei-day-trip is an online travel e-commerce website that provides customers w
 
 ## Test Account
 ```
-999@999.com 
-999999
+test@test.com 
+testtest
 ```
 
 ![首頁](https://user-images.githubusercontent.com/40664034/224470555-5bcdfa50-6edd-479a-8529-99235ff1204e.gif)
