@@ -1,6 +1,6 @@
-# [taipei-day-trip 台北一日遊電商專案](http://15.168.25.179:3000/)
+# [Taipei-Day-trip 台北一日遊電商專案](http://15.168.25.179:3000/)
 
-taipei-day-trip is an online travel e-commerce website that provides customers with the ability to browse and book day trips around Taipei. 
+Taipei-Day-Trip is an online travel e-commerce website that provides customers with the ability to browse and book day trips around Taipei. 
 
 ## Test Account
 ```
