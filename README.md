@@ -21,7 +21,8 @@ testtest
   * Python Flask
 * Database
   * MySQL
-  ![image](https://user-images.githubusercontent.com/40664034/224473170-72bc3231-5721-4c51-a349-2eb234e8d2be.png)
+  
+ ![taipei-database-line](https://user-images.githubusercontent.com/40664034/224695119-96bb54c3-7adc-4321-ae7e-78a85c811766.png)
 
 * Cloud Service
   * AWS EC2
